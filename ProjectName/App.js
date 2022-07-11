@@ -1,11 +1,7 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View, TouchableOpacity, FlatList
-} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView,ScrollView,StyleSheet,Text,View, TouchableOpacity} from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
+import Icon from 'react-native-vector-icons/Feather';
 
 const styles = StyleSheet.create({
   ButtonContainer: {
@@ -76,6 +72,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "white",
   },
+  DefaultHeader: {
+    flexDirection: 'row', 
+    justifyContent: 'flex-start',
+    paddingHorizontal: 32,
+  },
+  Header: {
+    borderBottomWidth: 1,
+    borderColor: '#EDEDEE',
+    paddingBottom: 16, 
+    marginBottom: 6
+  },
 });
 
 const UnsignedHeader = ({onPress}) => (
@@ -97,12 +104,25 @@ const AppButton = ({ onPress }) => (
   </View>
 );
 
+
+
 const App= () => {
   const id = [0, 1, 2]
   const buttonList = id.map((button)=> (<View style ={styles.RowContainer}><AppButton/><AppButton/></View>))
+  const seesaw = ["성수/AWA", "서촌/Red Room", "명동/Poethic AI"]
   return (
     <SafeAreaView>
+      <View style ={styles.Header}>
+      <View style ={styles.DefaultHeader}>
+      <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
+	    buttonTextAfterSelection={(selectedItem) => {return selectedItem}} rowTextForSelection={(item) => {return item}}
+      renderDropdownIcon ={() => {
+        return (
+          <Icon name="chevron-down" color={"#444"} size={18} />
+        );}}
+      dropdownIconPosition="right"/></View>
       <UnsignedHeader></UnsignedHeader>
+      </View>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic">
           <View>{buttonList}</View>
