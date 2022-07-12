@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   scrollview: {
-    height: '100%',
     //backgroundColor: 'lightblue',
     paddingHorizontal: 32,
     paddingVertical: 24,
@@ -33,6 +32,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginTop: 8,
+    marginBottom: 12,
   },
   textbutton: {
     color: "#4769EE",
@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginRight: 12, 
   },
+  
 });
+
 const customImg = [
   require('./images/banner-1.jpeg'),
   require('./images/banner-2.jpeg'),
@@ -59,21 +61,50 @@ const TextButton = ({onPress, title}) => (
   <TouchableOpacity onPress={onPress}><Text style={styles.textbutton}>{title}</Text></TouchableOpacity>
 );
 
+const DiscountButton = ({onPress, people, discount}) => (
+  <TouchableOpacity onPress={onPress}>
+  <View style = {{flexDirection: 'row', justifyContent: 'space-between', borderColor: "#4769EE",
+  borderWidth: 1, borderRadius: 18, marginTop: 12,}}>
+    <Text style = {{fontSize: 16, fontWeight:"400", marginLeft: 16, marginVertical: 16, }}>{people}인 쿠폰</Text>
+    <View style ={{backgroundColor: "#4769EE", paddingVertical: 16, borderBottomRightRadius: 16,
+  borderTopRightRadius: 16, width: 91, alignItems:'center'}}>
+      <Text style={{color:"white", fontSize: 16, fontWeight: "700"}}>{discount}% 할인</Text>
+    </View>
+  </View></TouchableOpacity>
+);
+const Footer = ({}) => (
+  <View style ={{borderColor: "#EDEDEE", borderWidth: 1, height: 102, paddingHorizontal: 32, paddingVertical: 16}}>
+    <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
+      <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
+    </View>
+  </View>
+);
 class DetailScreen extends Component {
   render() {
+    const id = [1, 2, 3, 4]
+    const buttonList = id.map((button)=> (
+      <DiscountButton people={button} discount={5*button}/>
+      ))
     return (
       <SafeAreaView>
+        
         <SliderBox images ={customImg} sliderBoxHeight={292}
         dotColor="#FFFFFF" inactiveDotColor="lightgray" dotStyle={styles.sliderdot}/>
+
         
         <ScrollView style={styles.scrollview}>
           <Information/>
-
           <View style={styles.ButtonContainer}>
             <TextButton title="카카오맵"/><TextButton title="네이버지도"/>
           </View>
-
+          <View>{buttonList}</View>
         </ScrollView>
+        
+        
+        <Footer/>
+        
+        
+
       </SafeAreaView>
       
     );
