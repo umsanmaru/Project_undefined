@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import {SafeAreaView, StyleSheet, Text, ScrollView, View, Button} from 'react-native'
+import {SafeAreaView, StyleSheet, Text, ScrollView, View, TextInput} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {SliderBox} from 'react-native-image-slider-box';
-import Icon from 'react-native-vector-icons/Feather';
+import { useState } from 'react';
+
 
 const styles = StyleSheet.create({
   sliderdot:{
@@ -74,21 +75,24 @@ const DiscountButton = ({onPress, people, discount}) => (
     </View>
   </View></TouchableOpacity>
 );
-const Footer = ({}) => (
+
+const Footer = ({onPress}) => (
   <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16,
   height: 102, width: "100%"}}>
+  <TouchableOpacity onPress={onPress}>
     <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
       <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
-    </View>
+    </View></TouchableOpacity>
   </View>
 );
 
-class DetailScreen extends Component {
-  render() {
+const DetailScreen = ({}) => {
     const id = [1, 2, 3, 4, 5, 6]
     const buttonList = id.map((button)=> (
       <DiscountButton people={button} discount={5*button}/>
       ))
+      const [Certificate, setCertificate] = useState(false);
+
     return (
       <SafeAreaView>
         
@@ -105,17 +109,15 @@ class DetailScreen extends Component {
           <View>{buttonList}</View>
           </View>
         </ScrollView>
-
-        <View style={{position: 'relative', bottom: 0}}>
-          <Footer/>
+        
+        <View style={{position: 'static', bottom: 0}}>
+          {Certificate ? <TextInput></TextInput> : (<Text>asfasfsa</Text>)}
+          <Footer onPress={() => {setCertificate(true)}}/>
         </View>
         
-        
-
       </SafeAreaView>
       
     );
-  }
 }
 
 
