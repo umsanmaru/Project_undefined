@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {SafeAreaView, StyleSheet, Text, ScrollView, View, Button} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {SliderBox} from 'react-native-image-slider-box';
+import Icon from 'react-native-vector-icons/Feather';
 
 const styles = StyleSheet.create({
   sliderdot:{
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
   },
   scrollview: {
     //backgroundColor: 'lightblue',
+    height: 350, 
     paddingHorizontal: 32,
     paddingVertical: 24,
   },
@@ -73,15 +75,17 @@ const DiscountButton = ({onPress, people, discount}) => (
   </View></TouchableOpacity>
 );
 const Footer = ({}) => (
-  <View style ={{borderColor: "#EDEDEE", borderWidth: 1, height: 102, paddingHorizontal: 32, paddingVertical: 16}}>
+  <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16,
+  height: 102, width: "100%"}}>
     <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
       <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
     </View>
   </View>
 );
+
 class DetailScreen extends Component {
   render() {
-    const id = [1, 2, 3, 4]
+    const id = [1, 2, 3, 4, 5, 6]
     const buttonList = id.map((button)=> (
       <DiscountButton people={button} discount={5*button}/>
       ))
@@ -91,17 +95,20 @@ class DetailScreen extends Component {
         <SliderBox images ={customImg} sliderBoxHeight={292}
         dotColor="#FFFFFF" inactiveDotColor="lightgray" dotStyle={styles.sliderdot}/>
 
-        
-        <ScrollView style={styles.scrollview}>
+
+        <ScrollView style={styles.scrollview} >
           <Information/>
+          <View style ={{marginBottom: 44}}>
           <View style={styles.ButtonContainer}>
             <TextButton title="카카오맵"/><TextButton title="네이버지도"/>
           </View>
           <View>{buttonList}</View>
+          </View>
         </ScrollView>
-        
-        
-        <Footer/>
+
+        <View style={{position: 'relative', bottom: 0}}>
+          <Footer/>
+        </View>
         
         
 
