@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {SafeAreaView, StyleSheet, Text, ScrollView, View, TextInput} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, ScrollView, View, TextInput, Modal, Keyboard, KeyboardAvoidingView} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {SliderBox} from 'react-native-image-slider-box';
 import { useState } from 'react';
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     height: 350, 
     paddingHorizontal: 32,
     paddingVertical: 24,
+    keyboardShouldPersistTaps: 'handled',
   },
   ButtonContainer: {
     flexDirection: 'row',
@@ -43,7 +44,25 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginRight: 12, 
   },
-  
+  modal:{
+    height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  modalwhitepart:{
+    position: "absolute", bottom: 0,
+    height: "30%", width: "100%", backgroundColor: "white", 
+    borderTopLeftRadius: 30, borderTopRightRadius: 30, 
+  },
+  textinmodal:{
+    fontSize: 23,
+    marginHorizontal: 32, marginBottom: 16,
+    marginTop: 44,
+    fontWeight: "700", 
+  },
+  textinputbox:{
+    borderWidth: 1, paddingHorizontal:16,
+    marginHorizontal: 32, marginBottom: 16,
+    height: 52, borderColor: "#B1AEAE", borderRadius: 12,
+  },
 });
 
 const customImg = [
@@ -78,7 +97,7 @@ const DiscountButton = ({onPress, people, discount}) => (
 
 const Footer = ({onPress}) => (
   <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16,
-  height: 102, width: "100%"}}>
+  height: 102, width: "100%", zIndex: 100}}>
   <TouchableOpacity onPress={onPress}>
     <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
       <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
@@ -109,11 +128,26 @@ const DetailScreen = ({}) => {
           <View>{buttonList}</View>
           </View>
         </ScrollView>
-        
-        <View style={{position: 'static', bottom: 0}}>
-          {Certificate ? <TextInput></TextInput> : (<Text>asfasfsa</Text>)}
           <Footer onPress={() => {setCertificate(true)}}/>
-        </View>
+          <Modal
+            animationType='none'
+            visible={Certificate}
+            onRequestClose={()=>{setCertificate(false)}}
+            transparent={true}
+            presentationStyle='overFullScreen'
+            style={{zIndex: 1}}>
+          <KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
+              <TouchableOpacity onPress={()=> setCertificate(false)}>
+                <View style={styles.modal}>
+                <View style ={styles.modalwhitepart}>
+                  <Text style={styles.textinmodal}>티켓 코드 입력</Text>
+                  <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" style={styles.textinputbox}></TextInput>
+                  <Footer></Footer>
+                </View></View>
+              </TouchableOpacity>
+              </KeyboardAvoidingView>
+              </Modal>
+
         
       </SafeAreaView>
       
