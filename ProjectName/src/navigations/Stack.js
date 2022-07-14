@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import DetailScreen from '../screens/DetailScreen';
 import MainScreen from '../screens/MainScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ const StackNavigation = ({}) => {
   return (
 
       <Stack.Navigator screenOptions = {{ cardStyle: {backgroundColor: 'white'} }} >
+        <Stack.Screen name="LOGIN" options={{headerShown:false}} component={LoginScreen}/>
         <Stack.Screen name="MAIN" options={{headerShown: false}} component={MainScreen}/>
         <Stack.Screen name="DETAIL" component={DetailScreen}
         options={{ headerStyle: {height: 105, }, 
