@@ -105,12 +105,32 @@ const Footer = ({onPress}) => (
   </View>
 );
 
+const Cert_Modal = ({onPress, Certificate})=>(
+  <Modal
+  animationType='none'
+  visible={Certificate}
+  transparent={true}
+  presentationStyle='overFullScreen'
+  style={{zIndex: 1}}>
+<KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.modal}>
+      <View style ={styles.modalwhitepart}>
+        <Text style={styles.textinmodal}>티켓 코드 입력</Text>
+        <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" style={styles.textinputbox}></TextInput>
+        <Footer></Footer>
+      </View></View>
+    </TouchableOpacity>
+    </KeyboardAvoidingView>
+    </Modal>
+);
+
 const DetailScreen = ({}) => {
     const id = [1, 2, 3, 4, 5, 6]
     const buttonList = id.map((button)=> (
       <DiscountButton people={button} discount={5*button}/>
       ))
-      const [Certificate, setCertificate] = useState(false);
+    const [Certificate, setCertificate] = useState(false);
 
     return (
       <SafeAreaView>
@@ -129,26 +149,7 @@ const DetailScreen = ({}) => {
           </View>
         </ScrollView>
           <Footer onPress={() => {setCertificate(true)}}/>
-          <Modal
-            animationType='none'
-            visible={Certificate}
-            onRequestClose={()=>{setCertificate(false)}}
-            transparent={true}
-            presentationStyle='overFullScreen'
-            style={{zIndex: 1}}>
-          <KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
-              <TouchableOpacity onPress={()=> setCertificate(false)}>
-                <View style={styles.modal}>
-                <View style ={styles.modalwhitepart}>
-                  <Text style={styles.textinmodal}>티켓 코드 입력</Text>
-                  <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" style={styles.textinputbox}></TextInput>
-                  <Footer></Footer>
-                </View></View>
-              </TouchableOpacity>
-              </KeyboardAvoidingView>
-              </Modal>
-
-        
+          <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
       </SafeAreaView>
       
     );
