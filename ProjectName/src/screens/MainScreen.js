@@ -110,7 +110,7 @@ const UnsignedHeader = ({onPress}) => (
   </TouchableOpacity>
 );
 
-const AppButton = ({ onPress }) => (
+const AppButton = ({ onPress, info }) => (
   <View>
   <TouchableOpacity onPress={onPress} style={styles.ButtonContainer}>
     <View style={styles.PictureContainer}>
@@ -120,10 +120,10 @@ const AppButton = ({ onPress }) => (
       />
     </View>
     <View style={styles.DiscountBar}>
-      <Text style={styles.DiscountNumber}>10~15%</Text>
+      <Text style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</Text>
     </View>
-      <Text style={styles.Name}>쏘리에스프레소바</Text>
-      <Text style ={styles.Info}>카페, 디저트</Text>
+      <Text style={styles.Name}>{info.storeName}</Text>
+      <Text style ={styles.Info}>{info.storeCategory}</Text>
   </TouchableOpacity>
   </View>
 );
@@ -159,27 +159,35 @@ const Cert_Modal = ({onPress, Certificate})=>(
 
 const MainScreen= ({navigation}) => {
   const id = [0, 1, 2]
+  const info = {
+    storeName: '쏘리에스프레소바',
+    storeCategory: '카페, 디저트',
+    min: 10,
+    max: 15,
+    imgSrc: 'banner-3'
+  }
   const buttonList = id.map((button)=> (
     <View style ={styles.RowContainer}>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')}/>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')}/>
-      </View>))
+      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
+      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
+    </View>)
+  )
   const seesaw = ["성수/AWA", "서촌/Red Room", "명동/Poethic AI"]
   const [Certificate, setCertificate] = useState(false);
 
   return (
     <SafeAreaView>
       <View style ={styles.Header}>
-      <View style ={styles.DefaultHeader}>
-      <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
-	    buttonTextAfterSelection={(selectedItem) => {return selectedItem}} rowTextForSelection={(item) => {return item}}
-      renderDropdownIcon ={() => {
-        return (<Icon name="chevron-down" color={"#444"} size={18} style={{marginRight: 32}}/>);}}
-      dropdownIconPosition="right"/></View>
-      <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
+        <View style ={styles.DefaultHeader}>
+          <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
+          buttonTextAfterSelection={(selectedItem) => {return selectedItem}} rowTextForSelection={(item) => {return item}}
+          renderDropdownIcon ={() => {
+            return (<Icon name="chevron-down" color={"#444"} size={18} style={{marginRight: 32}}/>);}}
+          dropdownIconPosition="right"/>
+        </View>
+        <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
       </View>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic">
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
           <View>{buttonList}</View>
       </ScrollView>
       <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
