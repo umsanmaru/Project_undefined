@@ -1,106 +1,12 @@
 import React, {useState} from 'react';
-import {SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import {Platform, SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
+import { styles } from './Style';
 
 
 
-const styles = StyleSheet.create({
-  ButtonContainer: {
-    width: Dimensions.get('window').width/2-40,
-    height: Dimensions.get('window').width/2+4,
-    //backgroundColor: "lightblue",
-    display: 'flex',
-    alignItems: 'flex-start',
-  },
-  PictureContainer: {
-    backgroundColor: "lightblue",
-    borderRadius: 16,
-    width: Dimensions.get('window').width/2-40,
-    height: Dimensions.get('window').width/2-40,
-  },
-  Name: {
-    color: "#212121",
-    //backgroundColor: "lightblue",
-    fontWeight: 'bold',
-    fontSize: 16,
-    left: 8, top: 12,
-    width: Dimensions.get('window').width/2-56,
-  },
-  Info: {
-    color: '#8F8F8F',
-    //backgroundColor: "pink",
-    fontSize: 12,
-    top: 16,
-    left: 8,
-    width: Dimensions.get('window').width/2-56,
-  },
-  DiscountBar: {
-    backgroundColor: "#4769EE",
-    position: 'absolute',
-    top: 24, right: 0, borderBottomLeftRadius: 10, borderTopLeftRadius: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  DiscountNumber:{
-    color: "white",
-    fontSize: 16,
-    fontWeight: '500',
-    marginHorizontal: 8, marginVertical: 4,
-  },
-  RowContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 32,
-    marginVertical: 10,
-    justifyContent: 'space-between',
-    //alignItems: 'center',
-  },
-  UnsignedContainer: {
-    backgroundColor: "#B1AEAE",
-    marginHorizontal: 32,
-    height: 72,
-    alignItems: 'center',
-    flexDirection: 'row', 
-    justifyContent: 'center',
-    borderRadius: 16, 
-  },
-  UnsignedText: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: "white",
-  },
-  DefaultHeader: {
-    flexDirection: 'row', 
-    justifyContent: 'flex-start',
-    paddingHorizontal: 32,
-  },
-  Header: {
-    borderBottomWidth: 1,
-    borderColor: '#EDEDEE',
-    paddingBottom: 16, 
-    marginBottom: 6
-  },
-  modal:{
-    height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)",
-  },
-  modalwhitepart:{
-    position: "absolute", bottom: 0,
-    height: "30%", width: "100%", backgroundColor: "white", 
-    borderTopLeftRadius: 30, borderTopRightRadius: 30, 
-  },
-  textinmodal:{
-    fontSize: 23,
-    marginHorizontal: 32, marginBottom: 16,
-    marginTop: 44,
-    fontWeight: "700", 
-  },
-  textinputbox:{
-    borderWidth: 1, paddingHorizontal:16,
-    marginHorizontal: 32, marginBottom: 16,
-    height: 52, borderColor: "#B1AEAE", borderRadius: 12,
-  },
-});
+
 
 const UnsignedHeader = ({onPress}) => (
   <TouchableOpacity onPress ={onPress} style={styles.UnsignedContainer}>
@@ -156,8 +62,7 @@ const Cert_Modal = ({onPress, Certificate})=>(
 );
 
 const MainScreen= ({navigation}) => {
-  const amount = 4
-  const id = [0, 1, 2, 3]
+  const id = [0, 1, 2, 3, 4]
   const info = {
     storeName: '쏘리에스프레소바',
     storeCategory: '카페, 디저트',
@@ -175,7 +80,8 @@ const MainScreen= ({navigation}) => {
   const [Certificate, setCertificate] = useState(false);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'android' ? 8 : 0,}}>
+      <Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>
       <View style ={styles.Header}>
         <View style ={styles.DefaultHeader}>
           <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
@@ -186,8 +92,8 @@ const MainScreen= ({navigation}) => {
         </View>
         <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
       </View>
-      <ScrollView>
-          <View>{buttonList}</View>
+      <ScrollView >
+          <View style={{paddingBottom: 32}}>{buttonList}</View>
       </ScrollView>
       <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
     </SafeAreaView>
