@@ -43,7 +43,7 @@ const Cert_Modal = ({onPress, Certificate})=>(
   visible={Certificate}
   transparent={true}
   presentationStyle='overFullScreen'
-  style={{zIndex: 100,}}>
+  style={{zIndex: 1,}}>
 <KeyboardAvoidingView behavior="position"
         style={{
           height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',
