@@ -13,7 +13,7 @@ const LoginScreen= ({navigation}) => {
     <SafeAreaView>
         <TouchableOpacity onPress={()=>navigation.navigate('MAIN')}
         style={{alignItems: "center", top: 250}}>
-            <Text style={{fontSize: 32, fontWeight:"bold", borderColor: "#4769EE",
+            <Text style={{fontSize: 32, fontWeight:"bold", borderColor: "#4769EE", color: "black",
             paddingHorizontal: 8,borderWidth:5}}>LOGIN</Text>
         </TouchableOpacity>
       

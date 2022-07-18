@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {SafeAreaView,ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import {SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 
+
+
 const styles = StyleSheet.create({
   ButtonContainer: {
-    height: 155+12+16+16,
-    width: 155,
+    width: Dimensions.get('window').width/2-40,
+    height: Dimensions.get('window').width/2+4,
     //backgroundColor: "lightblue",
     display: 'flex',
     alignItems: 'flex-start',
@@ -14,18 +16,16 @@ const styles = StyleSheet.create({
   PictureContainer: {
     backgroundColor: "lightblue",
     borderRadius: 16,
-    width: 155,
-    height: 155,
+    width: Dimensions.get('window').width/2-40,
+    height: Dimensions.get('window').width/2-40,
   },
   Name: {
     color: "#212121",
     //backgroundColor: "lightblue",
     fontWeight: 'bold',
     fontSize: 16,
-    left: 8,
-    top: 12,
-    width: 139,
-
+    left: 8, top: 12,
+    width: Dimensions.get('window').width/2-56,
   },
   Info: {
     color: '#8F8F8F',
@@ -33,14 +33,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     top: 16,
     left: 8,
-    width: 139,
+    width: Dimensions.get('window').width/2-56,
   },
   DiscountBar: {
     backgroundColor: "#4769EE",
     position: 'absolute',
-    height: 27,
-    top: 24, left: 75,
-    width: 80, borderBottomLeftRadius: 10, borderTopLeftRadius: 10,
+    top: 24, right: 0, borderBottomLeftRadius: 10, borderTopLeftRadius: 10,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -49,7 +47,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: '500',
-    right: 8,
+    marginHorizontal: 8, marginVertical: 4,
   },
   RowContainer: {
     flexDirection: 'row',
@@ -158,7 +156,8 @@ const Cert_Modal = ({onPress, Certificate})=>(
 );
 
 const MainScreen= ({navigation}) => {
-  const id = [0, 1, 2]
+  const amount = 4
+  const id = [0, 1, 2, 3]
   const info = {
     storeName: '쏘리에스프레소바',
     storeCategory: '카페, 디저트',
@@ -182,12 +181,12 @@ const MainScreen= ({navigation}) => {
           <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
           buttonTextAfterSelection={(selectedItem) => {return selectedItem}} rowTextForSelection={(item) => {return item}}
           renderDropdownIcon ={() => {
-            return (<Icon name="chevron-down" color={"#444"} size={18} style={{marginRight: 32}}/>);}}
+            return (<Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>);}}
           dropdownIconPosition="right"/>
         </View>
         <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
       </View>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView>
           <View>{buttonList}</View>
       </ScrollView>
       <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
