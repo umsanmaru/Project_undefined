@@ -1,12 +1,8 @@
 import React, {useState} from 'react';
-import {Platform, SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import {StatusBar, Platform, SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
-
-
-
-
 
 const UnsignedHeader = ({onPress}) => (
   <TouchableOpacity onPress ={onPress} style={styles.UnsignedContainer}>
@@ -47,13 +43,16 @@ const Cert_Modal = ({onPress, Certificate})=>(
   visible={Certificate}
   transparent={true}
   presentationStyle='overFullScreen'
-  style={{zIndex: 1}}>
-<KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
+  style={{zIndex: 100,}}>
+<KeyboardAvoidingView behavior="position"
+        style={{
+          height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',
+        }}>
     <TouchableOpacity onPress={onPress}>
       <View style={styles.modal}>
       <View style ={styles.modalwhitepart}>
         <Text style={styles.textinmodal}>티켓 코드 입력</Text>
-        <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" style={styles.textinputbox}></TextInput>
+        <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" placeholderTextColor="#B1AEAE" style={styles.textinputbox}></TextInput>
         <Footer></Footer>
       </View></View>
     </TouchableOpacity>
@@ -62,7 +61,18 @@ const Cert_Modal = ({onPress, Certificate})=>(
 );
 
 const MainScreen= ({navigation}) => {
-  const id = [0, 1, 2, 3, 4]
+  const amount = 7 // amounts of shops
+
+  var row_step
+  const id = []
+
+  for(row_step=1; row_step<amount/2; row_step++){
+    id.push([1,1]);
+  }
+  if(amount%2==1){id.push([1,0]);}
+
+  console.log(id)
+
   const info = {
     storeName: '쏘리에스프레소바',
     storeCategory: '카페, 디저트',
@@ -70,18 +80,19 @@ const MainScreen= ({navigation}) => {
     max: 15,
     imgSrc: 'banner-3'
   }
+
   const buttonList = id.map((button)=> (
     <View style ={styles.RowContainer}>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
+      {button[0] ?  <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/> : <View/>}
+      {button[1] ?  <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/> : <View/>}
     </View>)
   )
   const seesaw = ["성수/AWA", "서촌/Red Room", "명동/Poethic AI"]
-  const [Certificate, setCertificate] = useState(false);
+  const [Certificate, setCertificate] = useState(false); //해당 계정이 관람 인증이 되었는지
+  const [OpenCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
 
   return (
     <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'android' ? 8 : 0,}}>
-      <Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>
       <View style ={styles.Header}>
         <View style ={styles.DefaultHeader}>
           <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
@@ -90,12 +101,12 @@ const MainScreen= ({navigation}) => {
             return (<Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>);}}
           dropdownIconPosition="right"/>
         </View>
-        <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
+        {Certificate ? <View/>:<UnsignedHeader onPress={()=> {setOpenCert(true)}}/>}
       </View>
-      <ScrollView >
+      <ScrollView style={{zIndex: 0}}>
           <View style={{paddingBottom: 32}}>{buttonList}</View>
       </ScrollView>
-      <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
+      <Cert_Modal Certificate={OpenCert} onPress={()=> {setOpenCert(false)}}/>
     </SafeAreaView>
   );
 };
