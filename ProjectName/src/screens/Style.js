@@ -1,7 +1,21 @@
 import { Platform, StyleSheet , Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
-    ButtonContainer: {
+  sliderdot:{
+    width: 8,height: 8,borderRadius: 8,marginHorizontal: 0,
+  }, 
+  scrollview: {
+    paddingHorizontal: 32,
+    paddingVertical: 24,
+    keyboardShouldPersistTaps: 'handled',
+  }, 
+  textbutton: {
+    color: "#4769EE",
+    fontSize: 16,
+    fontWeight: "600",
+    marginRight: 12, 
+  },
+  ButtonContainer: {
       width: Dimensions.get('window').width/2-40,
       height: Dimensions.get('window').width/2+4,
       //backgroundColor: "lightblue",
@@ -85,10 +99,14 @@ const styles = StyleSheet.create({
       height: Platform.OS === "android" ? "35%" : "30%", width: "100%", backgroundColor: "white", 
       borderTopLeftRadius: 30, borderTopRightRadius: 30, 
     },
+    couponmodalwhitepart:{
+      position: "absolute", bottom: 0,
+      height: Platform.OS === "android" ? "41%" : "35%", width: "100%", backgroundColor: "white", 
+      borderTopLeftRadius: 30, borderTopRightRadius: 30, 
+    },
     textinmodal:{
-      fontSize: 23, color:"black",
-      marginHorizontal: 32, marginBottom: 16,
-      marginTop: 44,
+      fontSize: 23, color:"black", marginBottom: 16,
+      marginLeft: 32, marginTop: 44,
       fontWeight: "700", 
     },
     textinputbox:{

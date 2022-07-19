@@ -1,11 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView,ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
-import Icon from 'react-native-vector-icons/Feather';
-
-const styles = StyleSheet.create({
-  
-});
+import React from 'react';
+import {SafeAreaView,Text,TouchableOpacity,} from 'react-native';
 
 const LoginScreen= ({navigation}) => {
   

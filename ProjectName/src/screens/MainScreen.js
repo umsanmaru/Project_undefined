@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StatusBar, Platform, SafeAreaView,Dimensions, ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import {Platform, SafeAreaView,Dimensions, ScrollView,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
