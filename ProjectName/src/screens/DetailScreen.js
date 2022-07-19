@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { SafeAreaView, Dimensions, StyleSheet, Text, ScrollView, View, TextInput, Modal, Keyboard, KeyboardAvoidingView} from 'react-native'
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import { useState } from 'react';
-
+import Hyperlink from 'react-native-hyperlink';
+import openUrl from './openUrl.js';
 
 const styles = StyleSheet.create({
   sliderdot:{
@@ -50,10 +51,14 @@ const styles = StyleSheet.create({
     height: Platform.OS === "android" ? "35%" : "30%", width: "100%", backgroundColor: "white", 
     borderTopLeftRadius: 30, borderTopRightRadius: 30, 
   },
+  couponmodalwhitepart:{
+    position: "absolute", bottom: 0,
+    height: Platform.OS === "android" ? "41%" : "35%", width: "100%", backgroundColor: "white", 
+    borderTopLeftRadius: 30, borderTopRightRadius: 30, 
+  },
   textinmodal:{
-    fontSize: 23, color:"black",
-    marginHorizontal: 32, marginBottom: 16,
-    marginTop: 44,
+    fontSize: 22, color:"black", marginBottom: 16,
+    marginTop: 44, marginLeft: 32,
     fontWeight: "700", 
   },
   textinputbox:{
@@ -93,14 +98,15 @@ const DiscountButton = ({onPress, people, discount}) => (
   </View></TouchableOpacity>
 );
 
-const Footer = ({onPress}) => (
+const Footer = ({onPress, Textin}) => (
   <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16, width: "100%", zIndex: 100}}>
   <TouchableOpacity onPress={onPress}>
     <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
-      <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
+      <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>{Textin}</Text>
     </View></TouchableOpacity>
   </View>
 );
+
 const Cert_Modal = ({onPress, Certificate})=>(
   <Modal
   animationType='none'
@@ -117,40 +123,60 @@ const Cert_Modal = ({onPress, Certificate})=>(
       <View style ={styles.modalwhitepart}>
         <Text style={styles.textinmodal}>티켓 코드 입력</Text>
         <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" placeholderTextColor="#B1AEAE" style={styles.textinputbox}></TextInput>
-        <Footer></Footer>
+        <Footer Textin={'티켓 코드 입력'}></Footer>
       </View></View>
     </TouchableOpacity>
     </KeyboardAvoidingView>
     </Modal>
 );
 
+const Coupon_Modal = ({onPress, OpenCoupon})=>(
+  <Modal animationType='none' visible={OpenCoupon} transparent={true} presentationStyle='overFullScreen' style={{zIndex: 1,}}>
+    <KeyboardAvoidingView behavior="position" style={{height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%'}}>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.modal}>
+        <View style ={styles.couponmodalwhitepart}>
+          <Text style={styles.textinmodal}>내자상회</Text>
+          <Image source={require('./images/barcode.png')} style={{marginLeft: 32, width: Dimensions.get('window').width-64, height: 64}}></Image>
+          <View style={{flexDirection:'row', justifyContent: 'space-between', marginVertical: 16, marginHorizontal: 32} }>
+            <Text style ={{fontSize: 15, fontWeight: '400', color: "black"}}>2명 방문시 5% 할인</Text>
+            <Text style ={{fontSize: 15, fontWeight: '400', color: "#8F8F8F"}}>2022.07.19 19:18 발급</Text>
+            </View>
+          <Footer Textin={'쿠폰 변경 하기'}></Footer>
+        </View>
+      </View>
+    </TouchableOpacity>
+    </KeyboardAvoidingView>
+  </Modal>
+);
 
 const DetailScreen = ({}) => {
     const id = [1, 2, 3, 4, 5]
+    const naver_url = "https://naver.me/Fn2i2g0w"
+    const kakao_url = "https://place.map.kakao.com/212413668"
     const buttonList = id.map((button)=> (
-      <DiscountButton people={button} discount={5*button}/>
-      ))
+      <DiscountButton people={button} discount={5*button} onPress={()=>setOpenCoupon(true)}/> ))
     const [Certificate, setCertificate] = useState(false); // 티켓 인증 여부
     const [OpenCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
+    const [OpenCoupon, setOpenCoupon] = useState(false); //쿠폰 버튼의 클릭 여부
 
     return (
       <SafeAreaView>
-        
         <SliderBox images ={customImg} sliderBoxHeight={292}
         dotColor="#FFFFFF" inactiveDotColor="lightgray" dotStyle={styles.sliderdot}/>
-
-
         <ScrollView style={{height: Certificate ? Dimensions.get("window").height*(444/844) : Dimensions.get("window").height*(349/844)}} >
           <View style={styles.scrollview}>
           <Information/>
           <View style={styles.ButtonContainer}>
-            <TextButton title="카카오맵"/><TextButton title="네이버지도"/>
+            <TextButton title="카카오맵" onPress={()=>openUrl(kakao_url)}/>
+            <TextButton title="네이버지도" onPress={()=>openUrl(naver_url)}/>
           </View>
           <View>{buttonList}</View>
           </View>
         </ScrollView>
-          {Certificate ? <View/> : <Footer onPress={() => {setOpenCert(true)}}/>}
+          {Certificate ? <View/> : <Footer onPress={() => {setOpenCert(true)}} Textin={"관람 인증하기"}/>}
           <Cert_Modal Certificate={OpenCert} onPress={()=> {setOpenCert(false)}}/>
+          <Coupon_Modal OpenCoupon={OpenCoupon} onPress={()=> {setOpenCoupon(false)}}/>
       </SafeAreaView>
       
     );
