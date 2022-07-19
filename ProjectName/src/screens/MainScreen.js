@@ -29,35 +29,29 @@ const AppButton = ({ onPress, info }) => (
 );
 
 const Footer = ({onPress}) => (
-  <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16,
-  height: 102, width: "100%", zIndex: 100}}>
-  <TouchableOpacity onPress={onPress}>
-    <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
-      <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
-    </View></TouchableOpacity>
+  <View style ={{borderColor: "#EDEDEE", borderTopWidth: 1, paddingHorizontal: 32, paddingTop: 16,height: 102, width: "100%", zIndex: 100}}>
+    <TouchableOpacity onPress={onPress}>
+      <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
+        <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
+      </View>
+    </TouchableOpacity>
   </View>
 );
-const Cert_Modal = ({onPress, Certificate})=>(
-  <Modal
-  animationType='none'
-  visible={Certificate}
-  transparent={true}
-  presentationStyle='overFullScreen'
-  style={{zIndex: 1,}}>
-<KeyboardAvoidingView behavior="position"
-        style={{
-          height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',
-        }}>
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.modal}>
-      <View style ={styles.modalwhitepart}>
-        <Text style={styles.textinmodal}>티켓 코드 입력</Text>
-        <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" placeholderTextColor="#B1AEAE" style={styles.textinputbox}></TextInput>
-        <Footer></Footer>
-      </View></View>
-    </TouchableOpacity>
+
+const Cert_Modal = ({onPress, OpenCert, onPress_cert})=>(
+  <Modal animationType='fade' visible={OpenCert} transparent={true} presentationStyle='overFullScreen' style={{zIndex: 1,}}>
+    <KeyboardAvoidingView behavior="position" style={{ height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',}}>
+      <TouchableOpacity onPress={onPress}>
+        <View style={styles.modal}>
+          <View style ={styles.modalwhitepart}>
+            <Text style={styles.textinmodal}>티켓 코드 입력</Text>
+            <TextInput eyboardType='numeric' placeholder="티켓 앞장 하단의 코드를 입력하세요" placeholderTextColor="#B1AEAE" style={styles.textinputbox}></TextInput>
+            <Footer onPress={onPress_cert}></Footer>
+          </View>
+        </View>
+      </TouchableOpacity>
     </KeyboardAvoidingView>
-    </Modal>
+  </Modal>
 );
 
 const MainScreen= ({navigation}) => {
@@ -70,8 +64,6 @@ const MainScreen= ({navigation}) => {
     id.push([1,1]);
   }
   if(amount%2==1){id.push([1,0]);}
-
-  console.log(id)
 
   const info = {
     storeName: '쏘리에스프레소바',
@@ -106,7 +98,7 @@ const MainScreen= ({navigation}) => {
       <ScrollView style={{zIndex: 0}}>
           <View style={{paddingBottom: 32}}>{buttonList}</View>
       </ScrollView>
-      <Cert_Modal Certificate={OpenCert} onPress={()=> {setOpenCert(false)}}/>
+      <Cert_Modal OpenCert={OpenCert} onPress={()=> {setOpenCert(false)}} onPress_cert={()=> {setCertificate(true); setOpenCert(false);}}/>
     </SafeAreaView>
   );
 };
