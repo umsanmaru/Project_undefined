@@ -16,6 +16,7 @@
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-gesture-handler": "^2.5.0",
+    "react-native-hyperlink": "^0.0.19",
     "react-native-image-slider-box": "^2.0.1",
     "react-native-image-swiper": "^0.0.8",
     "react-native-paper": "^4.12.2",
