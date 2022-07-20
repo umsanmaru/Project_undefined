@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { SafeAreaView, StyleSheet, Text, ScrollView, View, TextInput, Modal, Keyboard, KeyboardAvoidingView} from 'react-native'
+import { SafeAreaView, StyleSheet, Text, ScrollView, View, TextInput, Modal, Keyboard, KeyboardAvoidingView, ActivityIndicator} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {SliderBox} from 'react-native-image-slider-box';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const styles = StyleSheet.create({
@@ -71,11 +71,11 @@ const customImg = [
   require('./images/banner-3.jpeg'),
 ];
 
-const Information = ({})=> (
+const Information = ({storeName})=> (
   <View>
-  <Text style={styles.Name}>내자상회</Text>
-  <Text style ={styles.Info}>카페, 디저트</Text>
-  <Text style ={styles.Address}>서울 종로구 사직로10길 3 1층</Text>
+    <Text style={styles.Name}>{storeName}</Text>
+    <Text style ={styles.Info}>카페, 디저트</Text>
+    <Text style ={styles.Address}>서울 종로구 사직로10길 3 1층</Text>
   </View>
 );
 
@@ -107,12 +107,13 @@ const Footer = ({onPress}) => (
 
 const Cert_Modal = ({onPress, Certificate})=>(
   <Modal
-  animationType='none'
-  visible={Certificate}
-  transparent={true}
-  presentationStyle='overFullScreen'
-  style={{zIndex: 1}}>
-<KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
+    animationType='none'
+    visible={Certificate}
+    transparent={true}
+    presentationStyle='overFullScreen'
+    style={{zIndex: 1}}
+  >
+  <KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
     <TouchableOpacity onPress={onPress}>
       <View style={styles.modal}>
       <View style ={styles.modalwhitepart}>
@@ -121,38 +122,51 @@ const Cert_Modal = ({onPress, Certificate})=>(
         <Footer></Footer>
       </View></View>
     </TouchableOpacity>
-    </KeyboardAvoidingView>
-    </Modal>
+  </KeyboardAvoidingView>
+  </Modal>
 );
 
-const DetailScreen = ({}) => {
-    const id = [1, 2, 3, 4, 5, 6]
-    const buttonList = id.map((button)=> (
-      <DiscountButton people={button} discount={5*button}/>
-      ))
-    const [Certificate, setCertificate] = useState(false);
+const DetailScreen = ({route}) => {
 
-    return (
-      <SafeAreaView>
-        
-        <SliderBox images ={customImg} sliderBoxHeight={292}
-        dotColor="#FFFFFF" inactiveDotColor="lightgray" dotStyle={styles.sliderdot}/>
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    setTimeout(()=>setIsLoading(false), 1000);
+  }, [])
 
+  const id = [1, 2, 3, 4, 5, 6]
+  const buttonList = id.map((button)=> (
+    <DiscountButton people={button} discount={5*button}/>
+  ))
+  const [Certificate, setCertificate] = useState(false);
 
-        <ScrollView style={styles.scrollview} >
-          <Information/>
-          <View style ={{marginBottom: 44}}>
-          <View style={styles.ButtonContainer}>
-            <TextButton title="카카오맵"/><TextButton title="네이버지도"/>
-          </View>
-          <View>{buttonList}</View>
-          </View>
-        </ScrollView>
-          <Footer onPress={() => {setCertificate(true)}}/>
-          <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
-      </SafeAreaView>
-      
-    );
+  return (
+    <SafeAreaView>
+      <SliderBox 
+        images ={customImg} 
+        sliderBoxHeight={292}
+        dotColor="#FFFFFF" 
+        inactiveDotColor="lightgray" 
+        dotStyle={styles.sliderdot}
+      />
+      <ScrollView style={styles.scrollview} >
+        <Information storeName={route.params.storeName}/>
+        {
+          // Check isLoading for api call
+          isLoading ? <ActivityIndicator/> :(
+            <View style ={{marginBottom: 44}}>
+              <View style={styles.ButtonContainer}>
+              <TextButton title="카카오맵"/><TextButton title="네이버지도"/>
+              </View>
+              <View>{buttonList}</View>
+            </View>
+          )
+        }
+      </ScrollView>
+      <Footer onPress={() => {setCertificate(true)}}/>
+      <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
+    </SafeAreaView>
+  );
 }
 
 

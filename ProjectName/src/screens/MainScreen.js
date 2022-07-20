@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {SafeAreaView,ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaView,ScrollView,StyleSheet,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput, ActivityIndicator} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -110,9 +110,14 @@ const UnsignedHeader = ({onPress}) => (
   </TouchableOpacity>
 );
 
-const AppButton = ({ onPress, info }) => (
+const AppButton = ({ navigation, info }) => (
   <View>
-  <TouchableOpacity onPress={onPress} style={styles.ButtonContainer}>
+  <TouchableOpacity 
+    onPress={()=>navigation.navigate('DETAIL', {
+      storeName: info.storeName
+    })} 
+    style={styles.ButtonContainer}
+  >
     <View style={styles.PictureContainer}>
     <Image
         style={styles.PictureContainer}
@@ -134,7 +139,8 @@ const Footer = ({onPress}) => (
   <TouchableOpacity onPress={onPress}>
     <View style={{backgroundColor: "#4769EE", paddingVertical: 16, alignItems: "center", borderRadius: 16}}>
       <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>관람 인증하기</Text>
-    </View></TouchableOpacity>
+    </View>
+  </TouchableOpacity>
   </View>
 );
 const Cert_Modal = ({onPress, Certificate})=>(
@@ -144,7 +150,7 @@ const Cert_Modal = ({onPress, Certificate})=>(
   transparent={true}
   presentationStyle='overFullScreen'
   style={{zIndex: 1}}>
-<KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
+  <KeyboardAvoidingView style ={{flex:1}} behavior='padding'>
     <TouchableOpacity onPress={onPress}>
       <View style={styles.modal}>
       <View style ={styles.modalwhitepart}>
@@ -153,11 +159,20 @@ const Cert_Modal = ({onPress, Certificate})=>(
         <Footer></Footer>
       </View></View>
     </TouchableOpacity>
-    </KeyboardAvoidingView>
-    </Modal>
+  </KeyboardAvoidingView>
+  </Modal>
 );
 
 const MainScreen= ({navigation}) => {
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentExhibit, setCurrentExhibit] = useState('성수/AWA');
+  
+  useEffect(() => {
+    setIsLoading(true)
+    setTimeout(()=>setIsLoading(false), 1000);
+  }, [currentExhibit]);
+
   const id = [0, 1, 2]
   const info = {
     storeName: '쏘리에스프레소바',
@@ -168,8 +183,8 @@ const MainScreen= ({navigation}) => {
   }
   const buttonList = id.map((button)=> (
     <View style ={styles.RowContainer}>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
-      <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/>
+      <AppButton navigation={navigation} info={info}/>
+      <AppButton navigation={navigation} info={info}/>
     </View>)
   )
   const seesaw = ["성수/AWA", "서촌/Red Room", "명동/Poethic AI"]
@@ -179,17 +194,33 @@ const MainScreen= ({navigation}) => {
     <SafeAreaView>
       <View style ={styles.Header}>
         <View style ={styles.DefaultHeader}>
-          <SelectDropdown data={seesaw} onSelect={(selectedItem, index) => {console.log(selectedItem, index)}}
-          buttonTextAfterSelection={(selectedItem) => {return selectedItem}} rowTextForSelection={(item) => {return item}}
-          renderDropdownIcon ={() => {
-            return (<Icon name="chevron-down" color={"#444"} size={18} style={{marginRight: 32}}/>);}}
-          dropdownIconPosition="right"/>
+          <SelectDropdown 
+            data={seesaw} 
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index)
+              setCurrentExhibit(selectedItem)
+            }}
+            defaultValue={currentExhibit}
+            value={currentExhibit} 
+            rowTextForSelection={(item) => {return item}}
+            renderDropdownIcon ={() => {
+              return (<Icon name="chevron-down" color={"#444"} size={18} style={{marginRight: 32}}/>);
+            }}
+            dropdownIconPosition="right"
+          />
         </View>
         <UnsignedHeader onPress={()=> {setCertificate(true)}}></UnsignedHeader>
       </View>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <View>{buttonList}</View>
-      </ScrollView>
+
+      
+      {
+        // Check isLoading for api call
+        isLoading ? <ActivityIndicator/> : (
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View>{buttonList}</View>
+        </ScrollView>
+      )}
+
       <Cert_Modal Certificate={Certificate} onPress={()=> {setCertificate(false)}}/>
     </SafeAreaView>
   );
