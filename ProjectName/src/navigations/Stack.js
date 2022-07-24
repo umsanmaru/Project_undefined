@@ -11,12 +11,11 @@ import LoginScreen from '../screens/LoginScreen';
 const Stack = createStackNavigator();
 
 
-const StackNavigation = ({}) => {
+const StackNavigation = () => {
   const navigation=useNavigation();
   return (
 
       <Stack.Navigator screenOptions = {{ cardStyle: {backgroundColor: 'white'} }} >
-        <Stack.Screen name="LOGIN" options={{headerShown:false}} component={LoginScreen}/>
         <Stack.Screen name="MAIN" options={{headerShown: false}} component={MainScreen}/>
         <Stack.Screen name="DETAIL" component={DetailScreen}
         options={{ headerStyle: {height: Platform.OS === "android" ? 60:105, }, 

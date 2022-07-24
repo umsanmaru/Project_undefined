@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {Platform, SafeAreaView,Dimensions, ScrollView,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Button, Platform, SafeAreaView,Dimensions, ScrollView,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
+import auth from '@react-native-firebase/auth';
 
 const UnsignedHeader = ({onPress}) => (
   <TouchableOpacity onPress ={onPress} style={styles.UnsignedContainer}>
@@ -89,8 +90,8 @@ const MainScreen= ({navigation}) => {
 
   const buttonList = id.map((button)=> (
     <View style ={styles.RowContainer}>
-      {button[0] ?  <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/> : <View/>}
-      {button[1] ?  <AppButton onPress={()=>navigation.navigate('DETAIL')} info={info}/> : <View/>}
+      {button[0] ?  <AppButton navigation={navigation} info={info}/> : <View/>}
+      {button[1] ?  <AppButton navigation={navigation} info={info}/> : <View/>}
     </View>)
   )
   const seesaw = ["성수/AWA", "서촌/Red Room", "명동/Poethic AI"]
