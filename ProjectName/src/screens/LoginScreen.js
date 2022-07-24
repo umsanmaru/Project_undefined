@@ -1,16 +1,19 @@
-import React from 'react';
-import {SafeAreaView,Text,TouchableOpacity,} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView, View} from 'react-native';
+import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { AuthContext } from '../App';
 
-const LoginScreen= ({navigation}) => {
-  
+
+
+
+const LoginScreen= () => {
+  const { signIn } = useContext(AuthContext);
+
   return (
     <SafeAreaView>
-        <TouchableOpacity onPress={()=>navigation.navigate('MAIN')}
-        style={{alignItems: "center", top: 250}}>
-            <Text style={{fontSize: 32, fontWeight:"bold", borderColor: "#4769EE", color: "black",
-            paddingHorizontal: 8,borderWidth:5}}>LOGIN</Text>
-        </TouchableOpacity>
-      
+      <View style={{alignItems: "center", top: 250}}>
+          <GoogleSigninButton onPress={signIn} />
+      </View>
     </SafeAreaView>
   );
 };

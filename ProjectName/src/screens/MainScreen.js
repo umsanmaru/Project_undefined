@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Button, Platform, SafeAreaView,Dimensions, ScrollView,Text,View,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
-import auth from '@react-native-firebase/auth';
+import { AuthContext } from '../App';
+
+
 
 const UnsignedHeader = ({onPress}) => (
   <TouchableOpacity onPress ={onPress} style={styles.UnsignedContainer}>
@@ -62,6 +64,8 @@ const Cert_Modal = ({onPress, OpenCert, onPress_cert})=>(
 
 const MainScreen= ({navigation}) => {
 
+  const { signOut } = useContext(AuthContext);
+
   const [isLoading, setIsLoading] = useState(true);
   const [currentExhibit, setCurrentExhibit] = useState('성수/AWA');
   
@@ -108,7 +112,8 @@ const MainScreen= ({navigation}) => {
             return (<Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>);}}
           dropdownIconPosition="right"/>
         </View>
-        {Certificate ? <View/>:<UnsignedHeader onPress={()=> {setOpenCert(true)}}/>}
+        {/* {Certificate ? <View/>:<UnsignedHeader onPress={()=> {setOpenCert(true)}}/>} */}
+        {Certificate ? <View/>:<UnsignedHeader onPress={signOut}/>}
       </View>
       <ScrollView style={{zIndex: 0}}>
           <View style={{paddingBottom: 32}}>{buttonList}</View>
