@@ -1,0 +1,59 @@
+{
+  "exhibitions": {
+    "성수_AWA": [
+      {
+        "storeName": "쏘리에스프레소바",
+        "storeCategory": "카페, 디저트",
+        "min": 10,
+        "max": 15,
+        "imgSrc": "banner-3"
+      },
+      {
+        "storeName": "쏘리에스프레소바",
+        "storeCategory": "카페, 디저트",
+        "min": 10,
+        "max": 15,
+        "imgSrc": "banner-3"
+      },
+      {
+        "storeName": "쏘리에스프레소바",
+        "storeCategory": "카페, 디저트",
+        "min": 10,
+        "max": 15,
+        "imgSrc": "banner-3"
+      }
+    ],
+    "서촌_Red Room": [
+      {
+        "storeName": "쏘리에스프레소바",
+        "storeCategory": "카페, 디저트",
+        "min": 10,
+        "max": 15,
+        "imgSrc": "banner-3"
+      }
+    ],
+    "명동_Poethic AI": [
+      {
+        "storeName": "쏘리에스프레소바",
+        "storeCategory": "카페, 디저트",
+        "min": 10,
+        "max": 15,
+        "imgSrc": "banner-3"
+      }
+    ]
+  },
+  "users":{
+    "Owx5zm8c0idBHIW9ZWamopvrun43": {
+      "certificate": {
+        "성수_AWA":1,
+        "서촌_Red Room":0, 
+        "명동_Poethic AI":0
+      }
+    }
+  },
+  "exhibitionNames": [
+    "성수_AWA",
+    "서촌_Red Room", 
+    "명동_Poethic AI"
+  ]
+}
