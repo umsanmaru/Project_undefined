@@ -55,5 +55,18 @@
     "성수_AWA",
     "서촌_Red Room", 
     "명동_Poethic AI"
-  ]
+  ],
+  "stores": {
+    "쏘리에스프레소바": {
+      "storeCategory": "카페, 디저트",
+      "storeAddress": "서울 종로구 자하문로2길 12 1층",
+      "naverUrl": "https://naver.me/Fn2i2g0w",
+      "kakaoUrl": "https://place.map.kakao.com/212413668",
+      "couponList": [
+        {"n": 1, "discount": 5},
+        {"n": 2, "discount": 10},
+        {"n": 3, "discount": 15}
+      ]
+    }
+  }
 }

@@ -4,8 +4,10 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { createStackNavigator } from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Feather';
+
 import { Platform } from 'react-native';
+
+import {LogBox} from "react-native";
 
 import LoginScreen from './screens/LoginScreen';
 import MainScreen from './screens/MainScreen'
@@ -13,6 +15,11 @@ import DetailScreen from './screens/DetailScreen';
 
 export const AuthContext = createContext();
 const Stack = createStackNavigator();
+
+LogBox.ignoreLogs([
+	"ViewPropTypes will be removed",
+	"ColorPropType will be removed",
+])
 
 async function googleSignIn() {
   const { idToken } = await GoogleSignin.signIn();
@@ -88,8 +95,6 @@ const App = () => {
 		[state.userToken]
 	);
 
-	console.log(state, auth().currentUser.uid);
-
 	if (state.isLoading) {
 		return <ActivityIndicator/>
 	}
@@ -107,13 +112,6 @@ const App = () => {
 								component={DetailScreen}
 								options={{ 
 									headerStyle: {height: Platform.OS === "android" ? 60:105, }, 
-									headerLeft: ()=>
-										<Icon 
-											name={'arrow-left'} 
-											color={"black"} 
-											onPress={ () => { navigation.goBack() }} 
-											style={{ marginLeft: 24 }} size={24}
-										/>,
 									headerTitle: "", 
 								}}
 							/>
