@@ -17,11 +17,14 @@ const StackNavigation = () => {
 
       <Stack.Navigator screenOptions = {{ cardStyle: {backgroundColor: 'white'} }} >
         <Stack.Screen name="MAIN" options={{headerShown: false}} component={MainScreen}/>
-        <Stack.Screen name="DETAIL" component={DetailScreen}
-        options={{ headerStyle: {height: Platform.OS === "android" ? 60:105, }, 
-        headerLeft: ()=><Icon name={'arrow-left'} color={"black"} onPress={ () => { navigation.goBack()}} 
-        style={{ marginLeft: 24 }} size={24}/>,
-        headerTitle: "", }}/>
+        <Stack.Screen name="DETAIL" 
+          component={DetailScreen}
+          options={{ 
+            headerStyle: {height: Platform.OS === "android" ? 60:105, }, 
+            headerLeft: ()=>
+              <Icon name={'arrow-left'} color={"black"} onPress={ () => { navigation.goBack()}} style={{ marginLeft: 24 }} size={24}/>,
+          headerTitle: "", }}
+        />
       </Stack.Navigator>
 
   );
