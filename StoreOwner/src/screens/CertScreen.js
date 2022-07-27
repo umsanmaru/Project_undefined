@@ -12,7 +12,7 @@ const CertScreen = ({navigation}) => {
       inputcode,
       [ Approval_code.includes(inputcode) ?
         { text: "확인", onPress: () => navigation.navigate("MAIN") }:
-        { text: "재입력", onPress: () => console.log(inputcode) }
+        { text: "재입력", onPress: () => setInputcode("")}
       ]
     );
     return (

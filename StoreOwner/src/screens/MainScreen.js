@@ -1,9 +1,17 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {Button, Platform, SafeAreaView,Text,Image,TouchableOpacity, Modal, KeyboardAvoidingView, TextInput} from 'react-native';
+import {SafeAreaView,Text,} from 'react-native';
 
-import {Alert,Dimensions,StyleSheet,Vibration,View,} from "react-native";
+import {Alert,Vibration,View,} from "react-native";
 import { Camera, CameraType } from "react-native-camera-kit";
+import { Dimensions} from 'react-native';
 
+const CameraFocus = ()=> (
+  <View style={{ position:"absolute", borderColor: "white", 
+    overflow:"hidden",borderWidth: 5, 
+        height: Dimensions.get('window').width*0.66, width: "66%",
+        top: (Dimensions.get('window').height-Dimensions.get('window').width*0.66)/2,
+        left: Dimensions.get('window').width*0.16}}></View>
+);
 
 const MainScreen= ({navigation}) => {
   const [scaned, setScaned] = useState(true);
@@ -16,7 +24,7 @@ const MainScreen= ({navigation}) => {
     if (!scaned) return;
     setScaned(false);
     Vibration.vibrate();
-    Alert.alert("QR Code", event.nativeEvent.codeStringValue, [
+    Alert.alert("인증 완료되었습니다", event.nativeEvent.codeStringValue, [
       { text: "OK", onPress: () => setScaned(true) },
     ]);
   };
@@ -27,12 +35,10 @@ const MainScreen= ({navigation}) => {
       </View>
       <Camera style={{flex: 1,}}
         cameraType={CameraType.Back}
-        showFrame={true}
+        scanBarcode={true}
         onReadCode={onBarCodeRead}
-        laserColor="rgba(0, 0, 0, 0)"
-        frameColor="rgba(0, 0, 0, 0)"
-        surfaceColor="rgba(0, 0, 0, 0)"
         ></Camera>
+      <CameraFocus></CameraFocus>
     </SafeAreaView>
   );
 };
