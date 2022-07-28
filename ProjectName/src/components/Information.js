@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from 'react-native';
-import { openURL } from "../screens/openUrl";
+import openURL from "../screens/openUrl";
 
 import TextButton from "./TextButton";
 
