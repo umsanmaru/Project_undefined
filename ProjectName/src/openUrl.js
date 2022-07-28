@@ -1,7 +1,5 @@
 import { Linking } from 'react-native';
 
-const openURL = (url) => {
+export const openURL = (url) => {
   Linking.openURL(url);
 };
-
-export default openURL;

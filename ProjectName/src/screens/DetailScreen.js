@@ -55,7 +55,7 @@ const DetailScreen = ({navigation, route}) => {
         <Icon 
           name={'arrow-left'} 
           color={"black"} 
-          onPress={ () => { navigation.goBack() }} 
+          onPress={ () => { navigation.pop() }} 
           style={{ marginLeft: 24 }} size={24}
         />,
     });

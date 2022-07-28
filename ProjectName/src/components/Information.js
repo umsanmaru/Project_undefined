@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from 'react-native';
-import { openURL } from "../screens/openUrl";
+import { openURL } from "../openUrl";
 
 import TextButton from "./TextButton";
 
@@ -12,8 +12,8 @@ const Information = ({storeName, storeCategory, storeAddress, kakaoUrl, naverUrl
       <Text style ={{color: '#232323', fontSize: 16, marginTop: 24,}}>{storeAddress}</Text>
     </View>
     <View style={{flexDirection:'row', marginTop: 4, marginBottom: 20,}}>
-      <TextButton title="카카오맵"/>
-      <TextButton title="네이버지도"/>
+      <TextButton title="카카오맵" onPress={()=>openURL(kakaoUrl)}/>
+      <TextButton title="네이버지도" onPress={()=>openURL(naverUrl)}/>
     </View>
   </>
 );

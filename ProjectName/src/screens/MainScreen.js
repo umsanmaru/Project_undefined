@@ -15,7 +15,8 @@ const isDebugging = true;
 
 const MainScreen= ({navigation}) => {
 
-  const { signOut, userToken } = useContext(AuthContext);
+  const { signOutGoogle, signOutKakao, userToken } = useContext(AuthContext);
+  console.log(userToken, "there")
 
   const [isLoadingStores, setIsLoadingStores] = useState(true);
   const [isLoadingCert, setIsLoadingCert] = useState(true);
@@ -24,12 +25,12 @@ const MainScreen= ({navigation}) => {
   const [currentExhibit, setCurrentExhibit] = useState("");
   const [storeList, setStoreList] = useState([]);
   const [certificateList, setCertificateList] = useState({});
-  const [certificated, setCertificated] = useState(false); //해당 계정이 관람 인증이 되었는지
+  const [certificated, setCertificated] = useState(null); //해당 계정이 관람 인증이 되었는지
   const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
 
-  console.log(certificated)
   useEffect(() => {
-      setCertificated(currentExhibit && certificateList && certificateList[currentExhibit.replace('/', '_')]);
+      setCertificated(currentExhibit 
+        && certificateList && !!(certificateList[currentExhibit.replace('/', '_')]));
     },
     [certificateList, currentExhibit]
   );
@@ -61,14 +62,16 @@ const MainScreen= ({navigation}) => {
   }, [currentExhibit]);
 
   useEffect(() => {
-    setIsLoadingCert(true);
+    const cleanup = setIsLoadingCert(true);
     database()
       .ref(`/users/${userToken}/certificate/`)
       .on('value', snapshot => {
         if (snapshot.val())
           setCertificateList(snapshot.val());
+        console.log(snapshot.val(), 'snap')
         setIsLoadingCert(false);
       })
+    return cleanup
   }, []);
 
   const id = [];
@@ -100,9 +103,16 @@ const MainScreen= ({navigation}) => {
     </View>)
   );
 
+  console.log(certificateList)
+
   return (
     <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'android' ? 8 : 0,}}>
-      {isDebugging ? <Button title={'signOut'} onPress={signOut} /> : <View/>}
+      {isDebugging ? (
+        <>
+          <Button title={'kakaoSignOut'} onPress={signOutKakao} />
+          <Button title={'googleSignOut'} onPress={signOutGoogle} />
+        </>
+      ): <View/>}
       <View style ={styles.Header}>
         <View style ={styles.DefaultHeader}>
           {
@@ -123,7 +133,7 @@ const MainScreen= ({navigation}) => {
             )
           }
         </View>
-        {isLoadingCert ? <ActivityIndicator/>
+        {isLoadingCert || certificated == null ? <ActivityIndicator/>
           : (certificated ? <View/>:<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
       </View>
       {isLoadingStores ? <ActivityIndicator/>

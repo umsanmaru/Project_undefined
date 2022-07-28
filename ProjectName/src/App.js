@@ -1,9 +1,13 @@
 import React, {useEffect, useMemo, useReducer, createContext} from 'react';
-import { ActivityIndicator, View, Button } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import { NavigationContainer  } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { createStackNavigator } from '@react-navigation/stack';
+import {
+  login as kakaoLogin,
+  logout as kakaoLogout
+} from '@react-native-seoul/kakao-login';
 
 import { Platform } from 'react-native';
 
@@ -39,7 +43,7 @@ const App = () => {
 				case 'RESTORE_TOKEN':
 					return {
 						...prevState,
-						userToken: action.token,
+						userToken: prevState.userToken || action.token,
 						isLoading: false,
 					};
 				case 'SIGN_IN':
@@ -69,6 +73,22 @@ const App = () => {
 			dispatch({ type: 'SIGN_IN', token: user.uid });
 	};
 
+	const signInWithKakao = ()  => {
+		kakaoLogin()
+			.then(token => {
+				console.log(token.idToken, "here")
+				
+				dispatch({ type: 'SIGN_IN', token: 
+					"kakao_" + token.idToken.split('.').join('').slice(0, 30)});
+			})
+			.catch(error =>console.log(error.message))
+	};
+
+	const signOutWithKakao = () => {
+		kakaoLogout();
+		dispatch({type: 'SIGN_OUT'});
+	};
+
 	useEffect(() => {
 		GoogleSignin.configure({
 			webClientId: "265977501020-dq10qkihc4h0nn37cmnm38l3m4l6adkr.apps.googleusercontent.com",
@@ -82,13 +102,19 @@ const App = () => {
 
 	const authContext = useMemo(
 		() => ({
-			signIn: async (data) => {
+			signInGoogle: async () => {
 				googleSignIn()
 			},
-			signOut: () => {
+			signOutGoogle: () => {
 				googleSignOut().then(
 					dispatch({ type: 'SIGN_OUT'})
 				);
+			},
+			signInKakao: () => {
+				signInWithKakao()					
+			},
+			signOutKakao: () => {
+				signOutWithKakao();
 			},
 			userToken: state.userToken
 		}),

@@ -6,7 +6,7 @@ const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }
   return (
     <View>
     <TouchableOpacity 
-      onPress={()=>navigation.navigate('DETAIL', {
+      onPress={()=>navigation.push('DETAIL', {
         storeName: info.storeName,
         certificated: certificated,
         userToken: userToken,
