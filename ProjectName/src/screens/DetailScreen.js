@@ -5,18 +5,13 @@ import { SliderBox } from 'react-native-image-slider-box';
 import { styles } from './Style';
 import database from '@react-native-firebase/database';
 import { certificateTicket } from '../ticketCertificate.js';
+import storage from '@react-native-firebase/storage';
 
 import Footer from '../components/Footer.js';
 import CertModal from '../components/CertModal.js';
 import Information from '../components/Information.js';
 import CouponModal from '../components/CouponModal.js';
 import DiscountButton from '../components/DiscountButton.js';
-
-const customImg = [
-  require('./images/banner-1.jpeg'),
-  require('./images/banner-2.jpeg'),
-  require('./images/banner-3.jpeg'),
-];
 
 const DetailScreen = ({navigation, route}) => {
 
@@ -26,6 +21,7 @@ const DetailScreen = ({navigation, route}) => {
   const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
   const [openCoupon, setOpenCoupon] = useState(false); //쿠폰 버튼의 클릭 여부
   const [storeInfo, setStoreInfo] = useState({});
+  const [banner, setBanner] = useState([]);
 
   const [isLoadingStoreInfo, setIsLoadingStoreInfo] = useState(true);
 
@@ -44,7 +40,7 @@ const DetailScreen = ({navigation, route}) => {
       discount={coupon.discount} 
       onPress={()=>{
         if (certificated_)
-          setOpenCoupon(true)
+          setOpenCoupon({n: coupon.n, discount: coupon.discount});
       }}
     /> 
   ))
@@ -81,10 +77,23 @@ const DetailScreen = ({navigation, route}) => {
       });
   }, []);
 
+  useEffect(() => {
+    Promise.all([
+      storage().ref(`images/${storeName}/1.jpeg`).getDownloadURL(),
+      storage().ref(`images/${storeName}/2.jpeg`).getDownloadURL(),
+      storage().ref(`images/${storeName}/3.jpeg`).getDownloadURL(),
+    ]).then(
+      res => {
+        console.log (res, "here")
+        setBanner([res[0], res[1], res[2]])
+      }
+    )
+  }, [])
+
   return (
     <SafeAreaView>
       <SliderBox 
-        images ={customImg} 
+        images ={banner} 
         sliderBoxHeight={292}
         dotColor="#FFFFFF" 
         inactiveDotColor="lightgray" 
@@ -127,6 +136,7 @@ const DetailScreen = ({navigation, route}) => {
         openCoupon={openCoupon} 
         onPress={()=> {setOpenCoupon(false)}}
         onPressCoupon={() => {setOpenCoupon(false)}}
+        userToken={userToken}
       />
     </SafeAreaView>
   );

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
 import { AuthContext } from '../App';
 import database from '@react-native-firebase/database';
+import storage from '@react-native-firebase/storage';
 import { certificateTicket } from '../ticketCertificate';
 
 import UnsignedHeader from '../components/UnsignedHeader';

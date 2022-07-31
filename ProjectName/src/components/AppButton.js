@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { styles } from "../screens/Style";
 import { Text, View,Image, TouchableOpacity } from 'react-native';
+import storage from '@react-native-firebase/storage';
 
 const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }) => {
+  const [url, setUrl] = useState();
+
+  useEffect(() => {
+    storage().ref(`images/${info.storeName}/1.jpeg`).getDownloadURL()
+      .then( url => setUrl(url));
+  }, [])
   return (
     <View>
     <TouchableOpacity 
@@ -17,7 +24,7 @@ const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }
       <View style={styles.PictureContainer}>
       <Image
           style={styles.PictureContainer}
-          source={require('../screens/images/banner-3.jpeg')}
+          source={{ uri: url }}
         />
       </View>
       <View style={styles.DiscountBar}>
