@@ -30,9 +30,25 @@
 				<string>com.googleusercontent.apps.265977501020-ab6k7adig5vq5j15u2em5f4hnhpt2hev</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao1c89d51e1c6aef19eda1df510685d120</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>1c89d51e1c6aef19eda1df510685d120</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaokompassauth</string>
+		<string>kakao1c89d51e1c6aef19eda1df510685d120</string>
+		<string>kakaolink</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
