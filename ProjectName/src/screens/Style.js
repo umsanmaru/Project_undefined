@@ -109,11 +109,6 @@ const styles = StyleSheet.create({
       height: Platform.OS === "android" ? "35%" : "30%", width: "100%", backgroundColor: "white", 
       borderTopLeftRadius: 30, borderTopRightRadius: 30, 
     },
-    couponmodalwhitepart:{
-      position: "absolute", bottom: 0,
-      height: Platform.OS === "android" ? "41%" : "35%", width: "100%", backgroundColor: "white", 
-      borderTopLeftRadius: 30, borderTopRightRadius: 30, 
-    },
     textinmodal:{
       fontSize: 23, color:"black", marginBottom: 16,
       marginLeft: 32, marginTop: 44,

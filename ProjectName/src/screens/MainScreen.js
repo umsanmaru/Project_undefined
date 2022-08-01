@@ -138,7 +138,7 @@ const MainScreen= ({navigation}) => {
                 rowTextForSelection={(item) => {return item}}
                 renderDropdownIcon ={() => {
                   return (
-                    <Icon name="chevron-down" color={"black"} size={18} style={{marginRight: 32}}/>
+                    <Icon name="chevron-down" color={"black"} size={18} style={{left: 0}}/>
                   );
                 }}
                 dropdownIconPosition="right"

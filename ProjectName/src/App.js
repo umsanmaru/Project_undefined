@@ -133,12 +133,13 @@ const App = () => {
 						<Stack.Screen name="LOGIN" options={{headerShown: false, cardStyle:{backgroundColor:"white"}}} component={LoginScreen} />
 					) : (
 						<>
-							<Stack.Screen name="MAIN" options={{headerShown: false}} component={MainScreen}/>
+							<Stack.Screen name="MAIN" options={{headerShown: false, cardStyle:{backgroundColor:"white"}}} component={MainScreen}/>
 							<Stack.Screen name="DETAIL" 
 								component={DetailScreen}
 								options={{ 
 									headerStyle: {height: Platform.OS === "android" ? 60:105, }, 
 									headerTitle: "", 
+									cardStyle:{backgroundColor:"white"}
 								}}
 							/>
 						</>

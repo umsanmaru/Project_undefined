@@ -9,6 +9,8 @@ const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
   const curTime = new Date().toString();
   const [couponInfo, setCouponInfo] = useState(openCoupon);
   const qrCode = !couponInfo ? <View/> : (<QRCode
+    size={200}
+    logoSize={100}
     value={
       `time:${curTime}_n:${couponInfo?.n}_dis:${couponInfo.discount}_token:${userToken}`}
   />);
@@ -25,24 +27,21 @@ const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
       presentationStyle='overFullScreen' 
       style={{zIndex: 1,}}
     >
-      <KeyboardAvoidingView 
-        behavior="position" 
-        style={{height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%'}}
-      >
-        <TouchableOpacity onPress={onPress}>
           <View style={styles.modal}>
-            <View style ={styles.couponmodalwhitepart}>
+            <View style={{height: "100%", width: "100%", justifyContent: "center", alignItems: "center"}}>
+            <View style ={{marginHorizontal: 16, backgroundColor: "white", borderRadius: 30,}}>
               <Text style={styles.textinmodal}>내자상회</Text>
-              {qrCode}
+              <View style={{alignItems:"center"}}>{qrCode}</View>
               <View style={{flexDirection:'row', justifyContent: 'space-between', marginVertical: 16, marginHorizontal: 32} }>
                 <Text style ={{fontSize: 15, fontWeight: '400', color: "black"}}>2명 방문시 5% 할인</Text>
                 <Text style ={{fontSize: 15, fontWeight: '400', color: "#8F8F8F"}}>2022.07.19 19:18 발급</Text>
               </View>
-              <Footer buttonText={'쿠폰 변경 하기'} onPress={onPressCoupon}></Footer>
+              <View>
+                <Footer buttonText={'쿠폰 변경 하기'} onPress={onPressCoupon}></Footer>
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
+          </View></View>
+        
     </Modal>
   );
 }
