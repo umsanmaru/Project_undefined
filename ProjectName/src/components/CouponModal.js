@@ -6,12 +6,11 @@ import QRCode from 'react-native-qrcode-svg';
 import Footer from './Footer';
 
 const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
-  const datetime = new Date().toLocaleString();
-  const timestamp = Date.parse(datetime) / 1000;
+  const curTime = new Date().toString();
   const [couponInfo, setCouponInfo] = useState(openCoupon);
   const qrCode = !couponInfo ? <View/> : (<QRCode
     value={
-      `time:${timestamp}_n:${couponInfo?.n}_dis:${couponInfo.discount}_token:${userToken}`}
+      `time:${curTime}_n:${couponInfo?.n}_dis:${couponInfo.discount}_token:${userToken}`}
   />);
 
   useEffect(()=>{

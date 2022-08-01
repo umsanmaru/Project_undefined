@@ -4,7 +4,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
 import { AuthContext } from '../App';
-import database from '@react-native-firebase/database';
+import database, { FirebaseDatabaseTypes } from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 import { certificateTicket } from '../ticketCertificate';
 
@@ -18,7 +18,6 @@ const isDebugging = true;
 const MainScreen= ({navigation}) => {
 
   const { signOutGoogle, signOutKakao, userToken } = useContext(AuthContext);
-  console.log(userToken, "there")
 
   const [isLoadingStores, setIsLoadingStores] = useState(true);
   const [isLoadingCert, setIsLoadingCert] = useState(true);
@@ -30,9 +29,22 @@ const MainScreen= ({navigation}) => {
   const [certificated, setCertificated] = useState(null); //해당 계정이 관람 인증이 되었는지
   const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
 
+  const cancleCert = () => {
+    database.ref(`/users/${userToken}/certificate/${currentExhibit}`).set(false);
+  }
+
   useEffect(() => {
-      setCertificated(currentExhibit 
-        && certificateList && !!(certificateList[currentExhibit.replace('/', '_')]));
+      if (currentExhibit && certificateList) {
+        const curExh = currentExhibit.replace('/', '_');
+        const certTime = certificateList[curExh];
+        const curTime = new Date();
+        
+        if ( certTime || curTime - new Date(certTime) < 86400000 ) {
+          setCertificated(certTime);
+          return;
+        }
+        setCertificated(false);
+      }
     },
     [certificateList, currentExhibit]
   );
@@ -89,7 +101,7 @@ const MainScreen= ({navigation}) => {
       {button[0] ?  
         <AppButton 
           navigation={navigation} 
-          certificated={certificated}
+          certificated={!!certificated}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[0]-1]}
@@ -97,7 +109,7 @@ const MainScreen= ({navigation}) => {
       {button[1] ?  
         <AppButton 
           navigation={navigation} 
-          certificated={certificated}
+          certificated={!!certificated}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[1]-1]}
@@ -136,7 +148,8 @@ const MainScreen= ({navigation}) => {
           }
         </View>
         {isLoadingCert || certificated == null ? <ActivityIndicator/>
-          : (certificated ? <SignedHeader/>:<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
+          : (certificated ? <SignedHeader certTime={new Date(certificated)} cancleCert={cancleCert}/>
+            :<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
       </View>
       {isLoadingStores ? <ActivityIndicator/>
         : (<ScrollView style={{zIndex: 0}}>
