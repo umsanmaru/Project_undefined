@@ -75,9 +75,7 @@ const App = () => {
 
 	const signInWithKakao = ()  => {
 		kakaoLogin()
-			.then(token => {
-				console.log(token.idToken, "here")
-				
+			.then(token => {				
 				dispatch({ type: 'SIGN_IN', token: 
 					"kakao_" + token.idToken.split('.').join('').slice(0, 30)});
 			})

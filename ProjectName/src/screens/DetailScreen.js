@@ -84,7 +84,6 @@ const DetailScreen = ({navigation, route}) => {
       storage().ref(`images/${storeName}/3.jpeg`).getDownloadURL(),
     ]).then(
       res => {
-        console.log (res, "here")
         setBanner([res[0], res[1], res[2]])
       }
     )

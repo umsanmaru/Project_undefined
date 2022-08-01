@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../screens/Style';
 
-const ONE_DAY = 86400000;
+const ONE_DAY = 1000*61;
 
 const SignedHeader = ({certTime, cancleCert}) => {
   const year = certTime.getFullYear();
@@ -18,12 +18,17 @@ const SignedHeader = ({certTime, cancleCert}) => {
   const interval = useRef(null);
 
   useEffect(() => {
+    if (timeElapsed > ONE_DAY) 
+      cancleCert();
     interval.current = setInterval(() => {
       const now = new Date();
       const timeElapsed = now - certTime;
+      console.log(timeElapsed, "eee")
 
-      if (timeElapsed > ONE_DAY) cancleCert();
-
+      if (timeElapsed > ONE_DAY) {
+        cancleCert();
+        clearInterval(interval.current);
+      }
       setHour((ONE_DAY - timeElapsed)/(1000*3600));
       setMinute(
         ((ONE_DAY - timeElapsed)%(1000*3600))/(60*1000)

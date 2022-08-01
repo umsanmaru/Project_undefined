@@ -30,7 +30,9 @@ const MainScreen= ({navigation}) => {
   const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
 
   const cancleCert = () => {
-    database.ref(`/users/${userToken}/certificate/${currentExhibit}`).set(false);
+    console.log("cancleCert called")
+    database().ref(
+      `/users/${userToken}/certificate/${currentExhibit.replace('/', '_')}/`).set(false);
   }
 
   useEffect(() => {
@@ -82,7 +84,6 @@ const MainScreen= ({navigation}) => {
       .on('value', snapshot => {
         if (snapshot.val())
           setCertificateList(snapshot.val());
-        console.log(snapshot.val(), 'snap')
         setIsLoadingCert(false);
       })
     return cleanup
@@ -116,8 +117,6 @@ const MainScreen= ({navigation}) => {
         /> : <View/>}
     </View>)
   );
-
-  console.log(certificateList)
 
   return (
     <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'android' ? 8 : 0,}}>
