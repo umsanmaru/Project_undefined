@@ -76,6 +76,16 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       borderRadius: 16, 
     },
+    SignedContainer: {
+      backgroundColor: "#4769EE",
+      marginHorizontal: 32,
+      marginBottom: 16,
+      height: 72,
+      alignItems: 'center',
+      flexDirection: 'row', 
+      justifyContent: 'center',
+      borderRadius: 16, 
+    },
     UnsignedText: {
       fontWeight: '700',
       fontSize: 16,
