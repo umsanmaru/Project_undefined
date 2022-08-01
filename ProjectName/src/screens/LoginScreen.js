@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, SafeAreaView, View } from 'react-native';
-import { GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native';
 import { AuthContext } from '../App';
 
 const LoginScreen= () => {
@@ -8,9 +7,26 @@ const LoginScreen= () => {
 
   return (
     <SafeAreaView>
-      <View style={{alignItems: "center", top: 250}}>
-        <GoogleSigninButton onPress={signInGoogle} />
-        <Button title="카카오톡 로그인" onPress={signInKakao} />
+      <View style={{height: "100%", alignItems: "center", justifyContent: "center", }}>
+        <TouchableOpacity onPress={signInGoogle}>
+        <View style={{ width: 326, height: 52, backgroundColor: "white", 
+        borderRadius: 12, borderWidth: 1, borderColor: "#B1AEAE",
+      flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+          <Image source={require('ProjectName/src/images/flat-color-icons_google.png')}
+          style={{resizeMode:"contain", width: 32, marginRight: 12,}}/>
+          <Text style={{fontSize: 16, fontWeight: "700"}}>구글로 로그인하기</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={signInKakao}>
+        <View style={{ width: 326, height: 52, backgroundColor: "#FAE301", 
+        borderRadius: 12, marginTop: 12,
+      flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+          <Image source={require('ProjectName/src/images/ri_kakao-talk-fill.png')}
+          style={{resizeMode:"contain", width: 32, marginRight: 12,}}/>
+          <Text style={{fontSize: 16, fontWeight: "700"}}>카카오톡으로 로그인하기</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
