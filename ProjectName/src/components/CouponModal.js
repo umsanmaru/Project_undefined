@@ -12,13 +12,7 @@ const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
   const qrCode = !couponInfo ? <View/> : (<QRCode
     value={
       `time:${timestamp}_n:${couponInfo?.n}_dis:${couponInfo.discount}_token:${userToken}`}
-  />);``
-
-  console.log(couponInfo)
-
-  // const qrCode = <QRCode
-  //   value={"test"}
-  // />
+  />);
 
   useEffect(()=>{
     setCouponInfo(openCoupon);
