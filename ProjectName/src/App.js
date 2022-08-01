@@ -130,7 +130,7 @@ const App = () => {
 			<NavigationContainer>
 				<Stack.Navigator>
 					{state.userToken == null ? (
-						<Stack.Screen name="LOGIN" options={{headerShown: false}} component={LoginScreen} />
+						<Stack.Screen name="LOGIN" options={{headerShown: false, cardStyle:{backgroundColor:"white"}}} component={LoginScreen} />
 					) : (
 						<>
 							<Stack.Screen name="MAIN" options={{headerShown: false}} component={MainScreen}/>

@@ -9,6 +9,7 @@ import storage from '@react-native-firebase/storage';
 import { certificateTicket } from '../ticketCertificate';
 
 import UnsignedHeader from '../components/UnsignedHeader';
+import SignedHeader from '../components/SignedHeader';
 import AppButton from '../components/AppButton';
 import CertModal from '../components/CertModal';
 
@@ -135,7 +136,7 @@ const MainScreen= ({navigation}) => {
           }
         </View>
         {isLoadingCert || certificated == null ? <ActivityIndicator/>
-          : (certificated ? <View/>:<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
+          : (certificated ? <SignedHeader/>:<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
       </View>
       {isLoadingStores ? <ActivityIndicator/>
         : (<ScrollView style={{zIndex: 0}}>
