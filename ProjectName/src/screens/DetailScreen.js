@@ -42,6 +42,7 @@ const DetailScreen = ({navigation, route}) => {
         if (certificated_)
           setOpenCoupon({n: coupon.n, discount: coupon.discount});
       }}
+      cert={certificated_}
     /> 
   ))
 
@@ -116,7 +117,7 @@ const DetailScreen = ({navigation, route}) => {
                   kakaoUrl={kakaoUrl}
                   naverUrl={naverUrl}
                 />
-                <View>{buttonList}</View>
+                {certificated_ ? <View>{buttonList}</View>:<View>{buttonList}</View>}
               </>
             )}
         </View>
