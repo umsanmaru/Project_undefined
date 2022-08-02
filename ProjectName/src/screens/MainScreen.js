@@ -102,7 +102,7 @@ const MainScreen= ({navigation}) => {
       {button[0] ?  
         <AppButton 
           navigation={navigation} 
-          certificated={!!certificated}
+          certificated={certificated}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[0]-1]}
@@ -110,7 +110,7 @@ const MainScreen= ({navigation}) => {
       {button[1] ?  
         <AppButton 
           navigation={navigation} 
-          certificated={!!certificated}
+          certificated={certificated}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[1]-1]}
