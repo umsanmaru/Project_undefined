@@ -4,6 +4,7 @@ import { TouchableOpacity, Image, Dimensions, View, Modal, KeyboardAvoidingView 
 import QRCode from 'react-native-qrcode-svg';
 import { defaultFontText as Text } from './Text';
 import Footer from './Footer';
+import { defaultBoldText as BoldText} from './BoldText';
 
 const CouponModal = ({openCoupon, onPressCoupon, userToken, certTime, storeName})=> {
   const curTime = new Date();
@@ -14,7 +15,7 @@ const CouponModal = ({openCoupon, onPressCoupon, userToken, certTime, storeName}
   const hour = curTime.getHours();
   const [couponInfo, setCouponInfo] = useState(openCoupon);
   const qrCode = !couponInfo ? <View/> : (<QRCode
-    size={200}
+    size={Dimensions.get('window').width*0.6}
     logoSize={100}
     value={
       `certTime=${certTime}_time=${curTime.toString()}_n=${couponInfo?.n}_
@@ -34,24 +35,31 @@ const CouponModal = ({openCoupon, onPressCoupon, userToken, certTime, storeName}
       presentationStyle='overFullScreen' 
       style={{zIndex: 1,}}
     >
-          <View style={styles.modal}>
-            <View style={{height: "100%", width: "100%", justifyContent: "center", alignItems: "center"}}>
-            <View style ={{marginHorizontal: 16, backgroundColor: "white", borderRadius: 30,}}>
-              <Text style={styles.textinmodal}>{storeName}</Text>
-              <View style={{alignItems:"center"}}>{qrCode}</View>
-              <View style={{flexDirection:'row', justifyContent: 'space-between', marginVertical: 16, marginHorizontal: 32} }>
-                <Text style ={{fontSize: 15, color: "black"}}>
-                  {`${couponInfo?.n}명 방문시 ${couponInfo?.discount}% 할인`}
-                </Text>
-                <Text style ={{fontSize: 15, color: "#8F8F8F"}}>
-                  {`${year}.${month>10?month:"0"+month}.${date>10?date:"0"+date} ${hour}:${minute>10?minute:"0"+minute} 발급`}
-                </Text>
-              </View>
+          <TouchableOpacity onPress={onPressCoupon}>
+          <View style={{height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", }}></View>
+          </TouchableOpacity>
+
+            <View style={{position: "absolute", bottom: 0, width: "100%", justifyContent: "flex-end", alignItems: "center"}}>
+            <View style ={{width:"100%", backgroundColor: "white", borderTopRightRadius: 30, borderTopLeftRadius: 30,}}>
+              
+              <View style={{alignItems: "center"}}>
+
+              <BoldText style={{fontSize: 23, color:"black", marginBottom: 16,marginTop: 44,}}>{storeName}</BoldText></View>
+              <View style={{alignItems:"center", marginTop: 16,}}>{qrCode}</View>
+
+              <View style={{alignItems:"center"}}>
+                <View style={{flexDirection:"row",justifyContent:"space-between", marginTop: 32, width: Dimensions.get('window').width*0.8, marginBottom: 16,} }> 
+                  <Text style ={{fontSize: 15, color: "black", marginBottom: 2, }}>{`${couponInfo?.n}명 방문시 ${couponInfo?.discount}% 할인`}</Text>
+                  <Text style ={{fontSize: 15, color: "#8F8F8F"}}>{`${year}.${month>10?month:"0"+month}.${date>10?date:"0"+date} ${hour}:${minute>10?minute:"0"+minute} 발급`}</Text>
+                </View>
+                </View>
+
               <View>
                 <Footer buttonText={'쿠폰 변경 하기'} onPress={onPressCoupon}></Footer>
               </View>
+              
             </View>
-          </View></View>
+          </View>
         
     </Modal>
   );
