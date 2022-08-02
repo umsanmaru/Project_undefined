@@ -1,10 +1,13 @@
 import React from "react";
 import { styles } from "../screens/Style";
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { defaultFontText as Text } from './Text';
+import { defaultBoldText as BoldText} from './BoldText';
+
 
 const TextButton = ({onPress, title}) => (
   <TouchableOpacity onPress={onPress}>
-    <Text style={styles.textbutton}>{title}</Text>
+    <BoldText style={styles.textbutton}>{title}</BoldText>
   </TouchableOpacity>
 );
 

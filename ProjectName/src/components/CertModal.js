@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { styles } from "../screens/Style";
-import { Platform ,Dimensions, Text, View, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput } from 'react-native';
+import { Platform ,Dimensions, View, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput } from 'react-native';
 import Footer from "./Footer";
+import { defaultFontText as Text } from './Text';
+import { defaultBoldText as BoldText} from './BoldText';
 
 const CertModal = ({
   onPress, openCert, setOpenCert, onPressCert, buttonText, userToken, currentExhibit
@@ -22,9 +24,10 @@ const CertModal = ({
         style={{ height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',}}
       >
         <TouchableOpacity onPress={onPress}>
-          <View style={styles.modal}>
+          <View style={{height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", }}></View>
+        </TouchableOpacity>
             <View style ={styles.modalwhitepart}>
-              <Text style={styles.textinmodal}>티켓 코드 입력</Text>
+              <BoldText style={styles.textinmodal}>티켓 코드 입력</BoldText>
               <TextInput 
                 eyboardType='numeric' 
                 placeholder="티켓 앞장 하단의 코드를 입력하세요" 
@@ -40,9 +43,7 @@ const CertModal = ({
                 }}
                 buttonText={buttonText} 
               />
-            </View>
           </View>
-        </TouchableOpacity>
       </KeyboardAvoidingView>
     </Modal>
   );

@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
   textbutton: {
     color: "#4769EE",
     fontSize: 16,
-    fontWeight: "600",
     marginRight: 12, 
   },
   ButtonContainer: {
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     Name: {
       color: "#212121",
       //backgroundColor: "lightblue",
-      fontWeight: 'bold',
       fontSize: 16,
       left: 8, top: Platform.OS === "android" ? 6 :  12,
       width: Dimensions.get('window').width/2-56,
@@ -55,7 +53,6 @@ const styles = StyleSheet.create({
     DiscountNumber:{
       color: "white",
       fontSize: 16,
-      fontWeight: '500',
       marginHorizontal: 8, marginVertical: 4,
     },
     RowContainer: {
@@ -87,7 +84,6 @@ const styles = StyleSheet.create({
       borderRadius: 16, 
     },
     UnsignedText: {
-      fontWeight: '700',
       fontSize: 16,
       color: "white",
     },
@@ -102,7 +98,7 @@ const styles = StyleSheet.create({
       marginBottom: 6
     },
     modal:{
-      height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 
+      height: "30%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 
     },
     modalwhitepart:{
       position: "absolute", bottom: 0,
@@ -112,7 +108,6 @@ const styles = StyleSheet.create({
     textinmodal:{
       fontSize: 23, color:"black", marginBottom: 16,
       marginLeft: 32, marginTop: 44,
-      fontWeight: "700", 
     },
     textinputbox:{
       borderWidth: 1, paddingHorizontal:16,
