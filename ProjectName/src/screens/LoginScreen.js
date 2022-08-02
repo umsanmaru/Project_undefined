@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, View, TouchableOpacity, Image } from 'react-native';
 import { AuthContext } from '../App';
+import { defaultFontText as Text } from '../components/Text';
 
 const LoginScreen= () => {
   const { signInGoogle, signInKakao } = useContext(AuthContext);

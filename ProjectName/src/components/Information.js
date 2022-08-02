@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { openURL } from "../openUrl";
-
+import { defaultFontText as Text } from './Text';
 import TextButton from "./TextButton";
 
 const Information = ({storeName, storeCategory, storeAddress, kakaoUrl, naverUrl})=> (
   <>
     <View>
-      <Text style={{color: "#212121", fontWeight: 'bold', fontSize: 24,}}>{storeName}</Text>
+      <Text style={{color: "#212121",  fontSize: 24,}}>{storeName}</Text>
       <Text style ={{color: '#8F8F8F', fontSize: 16, top: 4,}}>{storeCategory}</Text>
       <Text style ={{color: '#232323', fontSize: 16, marginTop: 24,}}>{storeAddress}</Text>
     </View>

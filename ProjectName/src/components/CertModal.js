@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { styles } from "../screens/Style";
-import { Platform ,Dimensions, Text, View, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput } from 'react-native';
+import { Platform ,Dimensions, View, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput } from 'react-native';
 import Footer from "./Footer";
+import { defaultFontText as Text } from './Text';
 
 const CertModal = ({
   onPress, openCert, setOpenCert, onPressCert, buttonText, userToken, currentExhibit

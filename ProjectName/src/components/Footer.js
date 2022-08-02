@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { defaultFontText as Text } from './Text';
 
 const Footer = ({onPress, buttonText}) => (
   <View style ={{
@@ -18,7 +19,7 @@ const Footer = ({onPress, buttonText}) => (
         alignItems: "center", 
         borderRadius: 16
       }}>
-        <Text style={{color: "white", fontSize: 16, fontWeight: "700"}}>{buttonText}</Text>
+        <Text style={{color: "white", fontSize: 16, }}>{buttonText}</Text>
       </View>
     </TouchableOpacity>
   </View>

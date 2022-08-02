@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { styles } from "../screens/Style";
-import { Text, View,Image, TouchableOpacity } from 'react-native';
+import { View,Image, TouchableOpacity } from 'react-native';
 import storage from '@react-native-firebase/storage';
+import { defaultFontText as Text } from './Text';
 
 const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }) => {
   const [url, setUrl] = useState();

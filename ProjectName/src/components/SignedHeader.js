@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { styles } from '../screens/Style';
+import { defaultFontText as Text } from './Text';
 
 const ONE_DAY = 1000*61;
 
@@ -43,7 +44,7 @@ const SignedHeader = ({certTime, cancleCert}) => {
       <View style={{width: "100%", flexDirection: "row", alignItems:"center", justifyContent:"space-between"}}>
       <View style={{marginLeft: 12,}}>
         <Text style={styles.UnsignedText}>관람 인증 완료</Text>
-        <Text style={{fontWeight: '700',fontSize: 12,color: "white",}}>
+        <Text style={{fontSize: 12,color: "white",}}>
           {`${year}.${month > 10 ? month : '0' + month}.${date > 10 ? data: '0' + date}`}
         </Text>
       </View>
