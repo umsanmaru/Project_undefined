@@ -14,7 +14,7 @@ const LoginScreen= () => {
       flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
           <Image source={require('ProjectName/src/images/flat-color-icons_google.png')}
           style={{resizeMode:"contain", width: 32, marginRight: 12,}}/>
-          <Text style={{fontSize: 16, fontWeight: "700"}}>구글로 로그인하기</Text>
+          <Text style={{fontSize: 16, fontWeight: "700", color: "#232323"}}>구글로 로그인하기</Text>
           </View>
         </TouchableOpacity>
 
@@ -24,7 +24,7 @@ const LoginScreen= () => {
       flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
           <Image source={require('ProjectName/src/images/ri_kakao-talk-fill.png')}
           style={{resizeMode:"contain", width: 32, marginRight: 12,}}/>
-          <Text style={{fontSize: 16, fontWeight: "700"}}>카카오톡으로 로그인하기</Text>
+          <Text style={{fontSize: 16, fontWeight: "700", color:"#391B1B"}}>카카오톡으로 로그인하기</Text>
           </View>
         </TouchableOpacity>
       </View>
