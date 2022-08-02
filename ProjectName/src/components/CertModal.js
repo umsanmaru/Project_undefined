@@ -24,7 +24,8 @@ const CertModal = ({
         style={{ height: Platform.OS === 'android' ? Dimensions.get('window').height: '100%',}}
       >
         <TouchableOpacity onPress={onPress}>
-          <View style={styles.modal}>
+          <View style={{height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", }}></View>
+        </TouchableOpacity>
             <View style ={styles.modalwhitepart}>
               <BoldText style={styles.textinmodal}>티켓 코드 입력</BoldText>
               <TextInput 
@@ -42,9 +43,7 @@ const CertModal = ({
                 }}
                 buttonText={buttonText} 
               />
-            </View>
           </View>
-        </TouchableOpacity>
       </KeyboardAvoidingView>
     </Modal>
   );

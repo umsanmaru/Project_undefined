@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
       marginBottom: 6
     },
     modal:{
-      height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 
+      height: "30%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 
     },
     modalwhitepart:{
       position: "absolute", bottom: 0,
