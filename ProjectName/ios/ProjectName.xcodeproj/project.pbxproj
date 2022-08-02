@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		29AF729BDDFFDEE5F3F0672B /* Pods_ProjectName.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF1686DA3CDEE88F0ECAF38 /* Pods_ProjectName.framework */; };
+		7CE34DD09107443D82552011 /* AppleSDGothicNeoM.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D481B6195A2F413DB14700C3 /* AppleSDGothicNeoM.ttf */; };
 		9926E25F287C501F000D4EE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9926E260287C5029000D4EE5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		995D4DE02896BE1200241B90 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 995D4DDF2896BE1200241B90 /* KakaoOpenSDK.framework */; };
@@ -45,6 +46,7 @@
 		99BF1C54288EDCD20062FBE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDCA2A6F32E55B4DF82E10B5 /* Pods-ProjectName.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectName.debug.xcconfig"; path = "Target Support Files/Pods-ProjectName/Pods-ProjectName.debug.xcconfig"; sourceTree = "<group>"; };
 		CDF1686DA3CDEE88F0ECAF38 /* Pods_ProjectName.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectName.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D481B6195A2F413DB14700C3 /* AppleSDGothicNeoM.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = AppleSDGothicNeoM.ttf; path = ../assets/fonts/AppleSDGothicNeoM.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F1099CB306B52C9C208BA45F /* Pods-ProjectName-ProjectNameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectName-ProjectNameTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectName-ProjectNameTests/Pods-ProjectName-ProjectNameTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1EEC12E4DCD957CBAC23D84 /* Pods-ProjectName-ProjectNameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectName-ProjectNameTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectName-ProjectNameTests/Pods-ProjectName-ProjectNameTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,15 @@
 			name = ProjectName;
 			sourceTree = "<group>";
 		};
+		26512EBCC1824A9D8C7E232B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D481B6195A2F413DB14700C3 /* AppleSDGothicNeoM.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +140,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				26512EBCC1824A9D8C7E232B /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -252,6 +264,7 @@
 				9926E260287C5029000D4EE5 /* Images.xcassets in Resources */,
 				9926E25F287C501F000D4EE5 /* LaunchScreen.storyboard in Resources */,
 				99BF1C55288EDCD20062FBE8 /* GoogleService-Info.plist in Resources */,
+				7CE34DD09107443D82552011 /* AppleSDGothicNeoM.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

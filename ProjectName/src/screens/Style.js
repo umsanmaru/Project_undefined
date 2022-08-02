@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
       fontWeight: '700',
       fontSize: 16,
       color: "white",
+      fontFamily: "AppleSDGothicNeoM"
     },
     DefaultHeader: {
       flexDirection: 'row', 
