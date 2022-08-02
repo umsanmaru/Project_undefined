@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "265977501020",
+    "firebase_url": "https://lay-us-server-916f9-default-rtdb.firebaseio.com",
+    "project_id": "lay-us-server-916f9",
+    "storage_bucket": "lay-us-server-916f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265977501020:android:636253d6a1488b037c1d99",
+        "android_client_info": {
+          "package_name": "com.jeonsibogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265977501020-3n4l7k1osuu3057n6lfs98dh4h3b8vpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jeonsibogo",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "265977501020-dq10qkihc4h0nn37cmnm38l3m4l6adkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5QyVnle3eo1_5KSsjsOMbvmpe1_n_1CE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265977501020-dq10qkihc4h0nn37cmnm38l3m4l6adkr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "265977501020-ab6k7adig5vq5j15u2em5f4hnhpt2hev.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ProjectName"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265977501020:android:3e05cc21582e27067c1d99",
+        "android_client_info": {
+          "package_name": "com.storeowner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265977501020-6v1fi01aabvlcm29i6mb5ib9mtbm5u5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.storeowner",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "265977501020-dq10qkihc4h0nn37cmnm38l3m4l6adkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5QyVnle3eo1_5KSsjsOMbvmpe1_n_1CE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265977501020-dq10qkihc4h0nn37cmnm38l3m4l6adkr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "265977501020-ab6k7adig5vq5j15u2em5f4hnhpt2hev.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ProjectName"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
