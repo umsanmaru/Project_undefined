@@ -3,6 +3,7 @@ import { styles } from "../screens/Style";
 import { View,Image, TouchableOpacity } from 'react-native';
 import storage from '@react-native-firebase/storage';
 import { defaultFontText as Text } from './Text';
+import { defaultBoldText as BoldText} from './BoldText';
 
 const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }) => {
   const [url, setUrl] = useState();
@@ -29,9 +30,9 @@ const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }
         />
       </View>
       <View style={styles.DiscountBar}>
-        <Text style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</Text>
+        <BoldText style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</BoldText>
       </View>
-        <Text style={styles.Name}>{info.storeName}</Text>
+        <BoldText style={styles.Name}>{info.storeName}</BoldText>
         <Text style ={styles.Info}>{info.storeCategory}</Text>
     </TouchableOpacity>
     </View>

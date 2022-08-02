@@ -103,7 +103,7 @@ const DetailScreen = ({navigation, route}) => {
         style={{
           height: 
             certificated_ ? 
-              Dimensions.get("window").height*(444/844) : Dimensions.get("window").height*(349/844)
+              Dimensions.get("window").height*(349/844) : Dimensions.get("window").height*(349/844)
         }} 
       >
         <View style={styles.scrollview}>
@@ -122,7 +122,8 @@ const DetailScreen = ({navigation, route}) => {
             )}
         </View>
       </ScrollView>
-      {certificated_ ? <View/> : <Footer onPress={() => {setOpenCert(true)}} buttonText={"관람 인증하기"}/>}
+      {certificated_ ? <View style={{opacity: 0.3,}}><Footer buttonText={"관람 인증완료"} disable_touch={true}/></View>:
+      <Footer onPress={() => {setOpenCert(true)}} buttonText={"관람 인증하기"} disable_touch={false}/>}
       <CertModal 
         openCert={openCert} 
         setOpenCert={setOpenCert}
@@ -138,6 +139,7 @@ const DetailScreen = ({navigation, route}) => {
         onPressCoupon={() => {setOpenCoupon(false)}}
         userToken={userToken}
       />
+ 
     </SafeAreaView>
   );
 }

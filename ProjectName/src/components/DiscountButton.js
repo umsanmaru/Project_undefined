@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity,  View } from 'react-native'
 import { defaultFontText as Text } from './Text';
+import { defaultBoldText as BoldText} from './BoldText';
 
 const DiscountButton = ({onPress, people, discount, cert}) => (
   <TouchableOpacity onPress={onPress} disabled={cert ? false: true}>
@@ -9,7 +10,7 @@ const DiscountButton = ({onPress, people, discount, cert}) => (
       <Text style = {{color: "black", fontSize: 16, marginLeft: 16, marginVertical: 16, }}>{people}인 쿠폰</Text>
       <View style ={{backgroundColor: "#4769EE", paddingVertical: 16, borderBottomRightRadius: 16,
       borderTopRightRadius: 16, width: 91, alignItems:'center'}}>
-        <Text style={{color:"white", fontSize: 16, }}>{discount}% 할인</Text>
+        <BoldText style={{color:"white", fontSize: 16, }}>{discount}% 할인</BoldText>
       </View>
     </View>
   </TouchableOpacity>

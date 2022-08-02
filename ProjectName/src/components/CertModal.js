@@ -3,6 +3,7 @@ import { styles } from "../screens/Style";
 import { Platform ,Dimensions, View, TouchableOpacity, Modal, KeyboardAvoidingView, TextInput } from 'react-native';
 import Footer from "./Footer";
 import { defaultFontText as Text } from './Text';
+import { defaultBoldText as BoldText} from './BoldText';
 
 const CertModal = ({
   onPress, openCert, setOpenCert, onPressCert, buttonText, userToken, currentExhibit
@@ -25,7 +26,7 @@ const CertModal = ({
         <TouchableOpacity onPress={onPress}>
           <View style={styles.modal}>
             <View style ={styles.modalwhitepart}>
-              <Text style={styles.textinmodal}>티켓 코드 입력</Text>
+              <BoldText style={styles.textinmodal}>티켓 코드 입력</BoldText>
               <TextInput 
                 eyboardType='numeric' 
                 placeholder="티켓 앞장 하단의 코드를 입력하세요" 
