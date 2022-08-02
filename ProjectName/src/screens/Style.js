@@ -87,10 +87,9 @@ const styles = StyleSheet.create({
       borderRadius: 16, 
     },
     UnsignedText: {
-      fontWeight: '700',
+      //fontWeight: '700',
       fontSize: 16,
       color: "white",
-      fontFamily: "AppleSDGothicNeoM"
     },
     DefaultHeader: {
       flexDirection: 'row', 

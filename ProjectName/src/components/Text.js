@@ -7,6 +7,6 @@ export function defaultFontText(props) {
 
 const styles = StyleSheet.create({
   defaultFontText: {
-    fontFamily: "AppleSDGothicNeoM"
+    fontFamily: "AppleSDGothicNeoM00"
   },
 })
