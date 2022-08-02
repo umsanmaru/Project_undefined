@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { Text, View } from 'react-native';
 import { styles } from '../screens/Style';
 
-const ONE_DAY = 1000*61;
+const ONE_DAY = 1000*86400;
 
 const SignedHeader = ({certTime, cancleCert}) => {
   const year = certTime.getFullYear();
@@ -34,7 +34,6 @@ const SignedHeader = ({certTime, cancleCert}) => {
         ((ONE_DAY - timeElapsed)%(1000*3600))/(60*1000)
       );
     }, 1000*60);
-    // clean-up 함수 리턴!
     return () => clearInterval(interval.current);
   }, []);
 

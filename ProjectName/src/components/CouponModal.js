@@ -5,14 +5,21 @@ import QRCode from 'react-native-qrcode-svg';
 
 import Footer from './Footer';
 
-const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
-  const curTime = new Date().toString();
+const CouponModal = ({openCoupon, onPressCoupon, userToken, certTime, storeName})=> {
+  const curTime = new Date();
+  const year = curTime.getFullYear();
+  const month = curTime.getMonth() + 1;
+  const date = curTime.getDate();
+  const minute = curTime.getMinutes();
+  const hour = curTime.getHours();
   const [couponInfo, setCouponInfo] = useState(openCoupon);
   const qrCode = !couponInfo ? <View/> : (<QRCode
     size={200}
     logoSize={100}
     value={
-      `time:${curTime}_n:${couponInfo?.n}_dis:${couponInfo.discount}_token:${userToken}`}
+      `certTime=${certTime}_time=${curTime.toString()}_n=${couponInfo?.n}_
+      dis=${couponInfo?.discount}_token=${userToken}_storeName=${storeName}`
+    }
   />);
 
   useEffect(()=>{
@@ -30,11 +37,15 @@ const CouponModal = ({onPress, openCoupon, onPressCoupon, userToken})=> {
           <View style={styles.modal}>
             <View style={{height: "100%", width: "100%", justifyContent: "center", alignItems: "center"}}>
             <View style ={{marginHorizontal: 16, backgroundColor: "white", borderRadius: 30,}}>
-              <Text style={styles.textinmodal}>내자상회</Text>
+              <Text style={styles.textinmodal}>{storeName}</Text>
               <View style={{alignItems:"center"}}>{qrCode}</View>
               <View style={{flexDirection:'row', justifyContent: 'space-between', marginVertical: 16, marginHorizontal: 32} }>
-                <Text style ={{fontSize: 15, fontWeight: '400', color: "black"}}>2명 방문시 5% 할인</Text>
-                <Text style ={{fontSize: 15, fontWeight: '400', color: "#8F8F8F"}}>2022.07.19 19:18 발급</Text>
+                <Text style ={{fontSize: 15, fontWeight: '400', color: "black"}}>
+                  {`${couponInfo?.n}명 방문시 ${couponInfo?.discount}% 할인`}
+                </Text>
+                <Text style ={{fontSize: 15, fontWeight: '400', color: "#8F8F8F"}}>
+                  {`${year}.${month>10?month:"0"+month}.${date>10?date:"0"+date} ${hour}:${minute>10?minute:"0"+minute} 발급`}
+                </Text>
               </View>
               <View>
                 <Footer buttonText={'쿠폰 변경 하기'} onPress={onPressCoupon}></Footer>

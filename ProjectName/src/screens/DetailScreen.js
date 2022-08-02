@@ -17,7 +17,7 @@ const DetailScreen = ({navigation, route}) => {
 
   const {certificated, userToken, currentExhibit, storeName} = route.params;
 
-  const [certificated_, setCertificated_] = useState(certificated); // 티켓 인증 여부
+  const [certificated_, setCertificated_] = useState(!!certificated); // 티켓 인증 여부
   const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
   const [openCoupon, setOpenCoupon] = useState(false); //쿠폰 버튼의 클릭 여부
   const [storeInfo, setStoreInfo] = useState({});
@@ -62,7 +62,7 @@ const DetailScreen = ({navigation, route}) => {
       .ref(`/users/${userToken}/certificate/${currentExhibit.replace('/', '_')}`)
       .on('value', snapshot => {
         if (snapshot.val())
-          setCertificated_(snapshot.val());
+          setCertificated_(!!snapshot.val());
       })
   }, []);
 
@@ -133,9 +133,10 @@ const DetailScreen = ({navigation, route}) => {
       />
       <CouponModal 
         openCoupon={openCoupon} 
-        onPress={()=> {setOpenCoupon(false)}}
         onPressCoupon={() => {setOpenCoupon(false)}}
         userToken={userToken}
+        certTime={certificated}
+        storeName={storeName}
       />
     </SafeAreaView>
   );
