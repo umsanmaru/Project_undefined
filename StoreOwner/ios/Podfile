@@ -9,6 +9,12 @@ target 'StoreOwner' do
 
   # Flags change depending on the env values.
   flags = get_default_flags()
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true;
+  $RNFirebaseAsStaticFramework = true
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -19,21 +25,29 @@ target 'StoreOwner' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+  #pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'StoreOwnerTests' do
     inherit! :complete
     # Pods for testing
   end
-
+  pre_install do |installer|
+    def installer.verify_no_static_framework_transitive_dependencies; end
+  end
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and
   # you should disable the next line.
-  use_flipper!()
-
+  #use_flipper!()
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+  
+    # This is to resolve "'shared_timed_mutex' is unavailable: introduced in iOS 10.0" error
+    installer.pods_project.targets.each do |t|
+      t.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
   end
 end
