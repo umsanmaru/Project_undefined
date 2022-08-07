@@ -6,19 +6,17 @@ import { defaultFontText as Text } from './Text';
 const ONE_DAY = 1000*86400;
 
 const SignedHeader = ({certTime, cancleCert}) => {
-  const year = certTime.getFullYear();
+  const year  = certTime.getFullYear();
   const month = certTime.getMonth() + 1;
   const date = certTime.getDate();
-  const now = new Date();
-  const timeElapsed = now - certTime;
 
-  const [hour, setHour] = useState((ONE_DAY - timeElapsed)/(1000*3600));
-  const [minute, setMinute] = useState(
-    ((ONE_DAY - timeElapsed)%(1000*3600))/(60*1000)
-  );
+  const [hour, setHour] = useState();
+  const [minute, setMinute] = useState();
   const interval = useRef(null);
 
   useEffect(() => {
+    const now = new Date();
+    const timeElapsed = now - certTime;
     if (timeElapsed > ONE_DAY) 
       cancleCert();
     interval.current = setInterval(() => {
@@ -36,7 +34,7 @@ const SignedHeader = ({certTime, cancleCert}) => {
       );
     }, 1000*60);
     return () => clearInterval(interval.current);
-  }, []);
+  }, [certTime]);
 
   return (
     <View style={styles.SignedContainer}>

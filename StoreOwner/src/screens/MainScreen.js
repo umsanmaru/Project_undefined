@@ -14,7 +14,7 @@ const CameraFocus = ()=> (
         left: Dimensions.get('window').width*0.16}}></View>
 );
 
-const storeName = '내자상회';
+const storeName = '꼬메노';
 
 const isValidCoupon = (certTime, couponStoreName, storeName) => {
   if (86400*1000 > new Date() - new Date (certTime) && storeName == couponStoreName)

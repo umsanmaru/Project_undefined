@@ -4,7 +4,7 @@ import { styles } from '../Style';
 
 const CertScreen = ({navigation}) => {
     const [inputcode, setInputcode] = useState('');
-    const Approval_code =['dooho', 'maru']
+    const Approval_code =['comeno', 'maru']
         
     const createAlert = () =>
     Alert.alert(

@@ -80,9 +80,9 @@ const DetailScreen = ({navigation, route}) => {
 
   useEffect(() => {
     Promise.all([
-      storage().ref(`images/${storeName}/1.jpeg`).getDownloadURL(),
-      storage().ref(`images/${storeName}/2.jpeg`).getDownloadURL(),
-      storage().ref(`images/${storeName}/3.jpeg`).getDownloadURL(),
+      storage().ref(`images/${storeName}/1.jpg`).getDownloadURL(),
+      storage().ref(`images/${storeName}/2.jpg`).getDownloadURL(),
+      storage().ref(`images/${storeName}/3.jpg`).getDownloadURL(),
     ]).then(
       res => {
         setBanner([res[0], res[1], res[2]])
