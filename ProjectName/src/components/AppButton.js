@@ -9,9 +9,8 @@ const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }
   const [url, setUrl] = useState();
 
   useEffect(() => {
-    const cleanup = storage().ref(`images/${info.storeName}/1.jpg`).getDownloadURL()
+    storage().ref(`images/${info.storeName}/1.jpg`).getDownloadURL()
       .then( url => setUrl(url));
-    return cleanup;
   }, [])
   return (
     <View>
