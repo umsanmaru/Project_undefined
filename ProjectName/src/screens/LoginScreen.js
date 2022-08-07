@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SafeAreaView, View, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, View, TouchableOpacity, Image, Dimensions} from 'react-native';
 import { AuthContext } from '../App';
 import { defaultFontText as Text } from '../components/Text';
 import { defaultBoldText as BoldText} from '../components/BoldText';
@@ -10,7 +10,17 @@ const LoginScreen= () => {
 
   return (
     <SafeAreaView>
-      <View style={{height: "100%", alignItems: "center", justifyContent: "center", }}>
+      <View style={{height: "100%", alignItems: "center", justifyContent: "center",}}>
+        <View style={{width: "100%", alignItems: "flex-start", }}>
+          <BoldText style={{fontSize: 32,marginHorizontal: 32, marginVertical: 14,}}>전시보고</BoldText>
+          <Text style={{fontSize: 16,marginHorizontal: 32, marginBottom: 4,}}>그라운드시소의 전시들을 보고 인증하면</Text>
+          <Text style={{fontSize: 16,marginHorizontal: 32,}}>전시보고와 제휴한 가게들에서 할인받을 수 있어요</Text>
+        </View>
+
+        <Image style={{resizeMode:"contain", height: Dimensions.get('window').width*0.5,
+        marginTop: Dimensions.get('window').height*0.13, marginBottom: Dimensions.get('window').height*0.18}} 
+        source={require('ProjectName/src/images/Mask-group.png')}></Image>
+
         <TouchableOpacity onPress={signInGoogle}>
         <View style={{ width: 326, height: 52, backgroundColor: "white", 
         borderRadius: 12, borderWidth: 1, borderColor: "#B1AEAE",
