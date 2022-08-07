@@ -17,7 +17,7 @@ const CameraFocus = ()=> (
 const storeName = '꼬메노';
 
 const isValidCoupon = (certTime, couponStoreName, storeName) => {
-  if (86400*1000 > new Date() - new Date (certTime) && storeName == couponStoreName)
+  if (storeName == couponStoreName)
     return true;
   return false;
 }
@@ -47,7 +47,7 @@ const MainScreen= ({navigation}) => {
           discount: discount,
           storeName: storeName
         })
-      Alert.alert("인증 완료되었습니다", `${storeName}쿠폰 ${n}명 ${discount}%`, [
+      Alert.alert("인증 완료되었습니다", `${storeName} 쿠폰 ${n}명 ${discount}%`, [
         { text: "OK", onPress: () => setScaned(true) },
       ]);
     } else {
@@ -60,7 +60,7 @@ const MainScreen= ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1,}}>
       <View style={{paddingVertical: 18, alignItems: "center"}}>
-        <Text style={{color: "black", fontSize: 24, fontWeight: "700"}}>내자상회</Text>
+        <Text style={{color: "black", fontSize: 24, fontWeight: "700"}}>꼬메노</Text>
       </View>
       <Camera style={{flex: 1,}}
         cameraType={CameraType.Back}
