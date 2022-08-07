@@ -39,15 +39,15 @@ const MainScreen= ({navigation}) => {
       = data.split('_').map(e=>e.split('=')[1]);
 
     if (isValidCoupon(certTime, couponStoreName, storeName)){
-      database()
-        .ref(`/coupons/${userToken}/`)
-        .set({
-          time: time,
-          n: n,
-          discount: discount,
-          storeName: storeName
-        })
-      Alert.alert("인증 완료되었습니다", `${storeName} 쿠폰 ${n}명 ${discount}%`, [
+      // database()
+      //   .ref(`/coupons/${userToken}/`)
+      //   .set({
+      //     time: time,
+      //     n: n,
+      //     discount: discount,
+      //     storeName: storeName
+      //   })
+      Alert.alert("인증 완료되었습니다", `${storeName}쿠폰 ${n}명 ${discount}%`, [
         { text: "OK", onPress: () => setScaned(true) },
       ]);
     } else {
