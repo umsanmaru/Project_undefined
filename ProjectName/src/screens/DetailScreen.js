@@ -15,14 +15,14 @@ import DiscountButton from '../components/DiscountButton.js';
 
 const DetailScreen = ({navigation, route}) => {
 
-  const {certificated, userToken, currentExhibit, storeName} = route.params;
+  const {userToken, currentExhibit, storeName} = route.params;
 
-  const [certificated_, setCertificated_] = useState(!!certificated); // 티켓 인증 여부
-  const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
-  const [openCoupon, setOpenCoupon] = useState(false); //쿠폰 버튼의 클릭 여부
+  const [certificated, setCertificated] = useState(route.params.certificated);
+  const [certTime, setCertTime] = useState(route.params.certTime);
+  const [openCert, setOpenCert] = useState(false);
+  const [openCoupon, setOpenCoupon] = useState(false);
   const [storeInfo, setStoreInfo] = useState({});
   const [banner, setBanner] = useState([]);
-
   const [isLoadingStoreInfo, setIsLoadingStoreInfo] = useState(true);
 
   const {
@@ -39,10 +39,10 @@ const DetailScreen = ({navigation, route}) => {
       people={coupon.n} 
       discount={coupon.discount} 
       onPress={()=>{
-        if (certificated_)
+        if (certificated)
           setOpenCoupon({n: coupon.n, discount: coupon.discount});
       }}
-      cert={certificated_}
+      certificated={certificated}
     /> 
   ))
 
@@ -62,8 +62,15 @@ const DetailScreen = ({navigation, route}) => {
     database()
       .ref(`/users/${userToken}/certificate/${currentExhibit.replace('/', '_')}`)
       .on('value', snapshot => {
-        if (snapshot.val())
-          setCertificated_(!!snapshot.val());
+        if (snapshot.val()) {
+          setCertTime(snapshot.val());
+          if (new Date() - new Date(snapshot.val()) <= 86400*1000)
+            setCertificated(true);
+          else setCertificated(false);
+        } else {
+          setCertTime(null);
+          setCertificated(false);
+        }
       })
   }, []);
 
@@ -102,7 +109,7 @@ const DetailScreen = ({navigation, route}) => {
       <ScrollView 
         style={{
           height: 
-            certificated_ ? 
+            certificated ? 
               Dimensions.get("window").height*(349/844) : Dimensions.get("window").height*(349/844)
         }} 
       >
@@ -117,12 +124,12 @@ const DetailScreen = ({navigation, route}) => {
                   kakaoUrl={kakaoUrl}
                   naverUrl={naverUrl}
                 />
-                {certificated_ ? <View>{buttonList}</View>:<View>{buttonList}</View>}
+                {certificated ? <View>{buttonList}</View>:<View>{buttonList}</View>}
               </>
             )}
         </View>
       </ScrollView>
-      {certificated_ ? <View style={{opacity: 0.3,}}><Footer buttonText={"관람 인증완료"} disable_touch={true}/></View>:
+      {certificated ? <View style={{opacity: 0.3,}}><Footer buttonText={"관람 인증완료"} disable_touch={true}/></View>:
       <Footer onPress={() => {setOpenCert(true)}} buttonText={"관람 인증하기"} disable_touch={false}/>}
       <CertModal 
         openCert={openCert} 
@@ -137,7 +144,7 @@ const DetailScreen = ({navigation, route}) => {
         openCoupon={openCoupon} 
         onPressCoupon={() => {setOpenCoupon(false)}}
         userToken={userToken}
-        certTime={certificated}
+        certTime={certTime}
         storeName={storeName}
       />
  

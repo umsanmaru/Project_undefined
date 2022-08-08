@@ -4,20 +4,31 @@ import { View,Image, TouchableOpacity } from 'react-native';
 import storage from '@react-native-firebase/storage';
 import { defaultFontText as Text } from './Text';
 import { defaultBoldText as BoldText} from './BoldText';
+import { useRef } from 'react'
 
-const AppButton = ({ navigation, certificated, userToken, currentExhibit, info }) => {
+const AppButton = ({ navigation, certificated, certTime, userToken, currentExhibit, info }) => {
   const [url, setUrl] = useState();
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => isMounted.current = false;
+  }, []);
 
   useEffect(() => {
     storage().ref(`images/${info.storeName}/1.jpg`).getDownloadURL()
-      .then( url => setUrl(url));
-  }, [])
+      .then( url => {
+        if (isMounted.current) setUrl(url);
+      });
+  }, []);
+
   return (
     <View>
     <TouchableOpacity 
       onPress={()=>navigation.push('DETAIL', {
         storeName: info.storeName,
         certificated: certificated,
+        certTime: certTime,
         userToken: userToken,
         currentExhibit: currentExhibit,
       })} 

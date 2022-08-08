@@ -4,8 +4,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
 import { AuthContext } from '../App';
-import database, { FirebaseDatabaseTypes } from '@react-native-firebase/database';
-import storage from '@react-native-firebase/storage';
+import database from '@react-native-firebase/database';
 import { certificateTicket } from '../ticketCertificate';
 
 import UnsignedHeader from '../components/UnsignedHeader';
@@ -26,28 +25,29 @@ const MainScreen= ({navigation}) => {
   const [currentExhibit, setCurrentExhibit] = useState("");
   const [storeList, setStoreList] = useState([]);
   const [certificateList, setCertificateList] = useState({});
-  const [certificated, setCertificated] = useState(null); //해당 계정이 관람 인증이 되었는지
-  const [openCert, setOpenCert] = useState(false); // 티켓 인증 모달의 상태
+  const [certificated, setCertificated] = useState(false);
+  const [certTime, setCertTime] = useState(null);
+  const [openCert, setOpenCert] = useState(false);
 
   const cancleCert = () => {
-    console.log("cancleCert called")
     database().ref(
       `/users/${userToken}/certificate/${currentExhibit.replace('/', '_')}/`).set(false);
   }
 
   useEffect(() => {
-      if (currentExhibit && certificateList) {
-        const curExh = currentExhibit.replace('/', '_');
-        const certTime = certificateList[curExh];
-        const curTime = new Date();
-        
-        if ( certTime || curTime - new Date(certTime) < 86400000 ) {
-          setCertificated(certTime);
-          return;
-        }
+    if (currentExhibit && certificateList) {
+      const curExh = currentExhibit.replace('/', '_');
+      const certTime = certificateList[curExh];
+      const curTime = new Date();
+      
+      if ( certTime || curTime - new Date(certTime) <= 86400000 ) {
+        setCertTime(certTime)
+        setCertificated(true);
+      } else {
         setCertificated(false);
+        setCertTime(null);
       }
-    },
+    }},
     [certificateList, currentExhibit]
   );
 
@@ -78,15 +78,16 @@ const MainScreen= ({navigation}) => {
   }, [currentExhibit]);
 
   useEffect(() => {
-    const cleanup = setIsLoadingCert(true);
+    setIsLoadingCert(true);
     database()
       .ref(`/users/${userToken}/certificate/`)
       .on('value', snapshot => {
         if (snapshot.val())
           setCertificateList(snapshot.val());
+        else 
+          setCertificateList([]);
         setIsLoadingCert(false);
       })
-    return cleanup
   }, []);
 
   const id = [];
@@ -103,6 +104,7 @@ const MainScreen= ({navigation}) => {
         <AppButton 
           navigation={navigation} 
           certificated={certificated}
+          certTime={certTime}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[0]-1]}
@@ -111,6 +113,7 @@ const MainScreen= ({navigation}) => {
         <AppButton 
           navigation={navigation} 
           certificated={certificated}
+          certTime={certTime}
           userToken={userToken}
           currentExhibit={currentExhibit}
           info={storeList[button[1]-1]}
@@ -147,7 +150,7 @@ const MainScreen= ({navigation}) => {
           }
         </View>
         {isLoadingCert || certificated == null ? <ActivityIndicator/>
-          : (certificated ? <SignedHeader certTime={new Date(certificated)} cancleCert={cancleCert}/>
+          : (certificated ? <SignedHeader certTime={certTime} cancleCert={cancleCert}/>
             :<UnsignedHeader onPress={()=>setOpenCert(true)}/>)}
       </View>
       {isLoadingStores ? <ActivityIndicator/>

@@ -27,7 +27,6 @@ const CouponModal = ({openCoupon, onPressCoupon, userToken, certTime, storeName}
   const [timeLeft, setTimeLeft] = useState(60);
 
   useEffect(() => {
-    // exit early when we reach 0
     if (!timeLeft) return onPressCoupon();
     const intervalId = setInterval(() => {
       setTimeLeft(timeLeft - 1);

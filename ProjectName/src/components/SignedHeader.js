@@ -6,22 +6,29 @@ import { defaultFontText as Text } from './Text';
 const ONE_DAY = 1000*86400;
 
 const SignedHeader = ({certTime, cancleCert}) => {
-  const year  = certTime.getFullYear();
-  const month = certTime.getMonth() + 1;
-  const date = certTime.getDate();
+  const certTimeObj = new Date(certTime);
+  const year  = certTimeObj.getFullYear();
+  const month = certTimeObj.getMonth() + 1;
+  const date = certTimeObj.getDate();
 
-  const [hour, setHour] = useState();
-  const [minute, setMinute] = useState();
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
   const interval = useRef(null);
 
   useEffect(() => {
     const now = new Date();
-    const timeElapsed = now - certTime;
+    const timeElapsed = now - certTimeObj;
     if (timeElapsed > ONE_DAY) 
       cancleCert();
+      
+    setHour((ONE_DAY - timeElapsed)/(1000*3600));
+    setMinute(
+      ((ONE_DAY - timeElapsed)%(1000*3600))/(60*1000)
+    );
+    
     interval.current = setInterval(() => {
       const now = new Date();
-      const timeElapsed = now - certTime;
+      const timeElapsed = now - certTimeObj;
       console.log(timeElapsed, "eee")
 
       if (timeElapsed > ONE_DAY) {
