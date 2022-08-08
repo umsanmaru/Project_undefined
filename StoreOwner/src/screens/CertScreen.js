@@ -1,20 +1,30 @@
-import React, {useState} from 'react';
-import { Text , SafeAreaView, TextInput, TouchableOpacity, View, Alert} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text , SafeAreaView, TextInput, TouchableOpacity, View, Alert } from 'react-native';
 import { styles } from '../Style';
+import { AuthContext } from '../App';
+
 
 const CertScreen = ({navigation}) => {
+    const { signIn, storeCodes } = useContext(AuthContext);
     const [inputcode, setInputcode] = useState('');
-    const Approval_code =['comeno', 'maru']
         
-    const createAlert = () =>
-    Alert.alert(
-      Approval_code.includes(inputcode) ? "인증 완료되었습니다" : "잘못된 코드입니다",
-      inputcode,
-      [ Approval_code.includes(inputcode) ?
-        { text: "확인", onPress: () => navigation.navigate("MAIN") }:
-        { text: "재입력", onPress: () => setInputcode("")}
-      ]
-    );
+    const createAlert = () => {
+        if (storeCodes[inputcode]) {
+            console.log("asd")
+            signIn(inputcode);
+        }
+        Alert.alert(
+            storeCodes[inputcode] ? "인증 완료되었습니다" : "잘못된 코드입니다",
+            inputcode,
+            [ storeCodes[inputcode] ?
+                { 
+                    text: "확인", 
+                    onPress: () => navigation.navigate("MAIN", {storeName: storeCodes[inputcode]}) 
+                }:
+                { text: "재입력", onPress: () => setInputcode("")}
+            ]
+        )
+    }
     return (
         <SafeAreaView style={{flex: 1, justifyContent:"center",}}>
             <TextInput 

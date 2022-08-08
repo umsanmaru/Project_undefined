@@ -17,7 +17,9 @@ const CameraFocus = ()=> (
 const storeName = '꼬메노';
 
 const isValidCoupon = (certTime, couponStoreName, storeName) => {
-  if (storeName == couponStoreName)
+  console.log(couponStoreName, storeName)
+  console.log(new Date(), new Date (certTime))
+  if (86400*1000 > new Date() - new Date (certTime) && storeName == couponStoreName)
     return true;
   return false;
 }
@@ -39,14 +41,13 @@ const MainScreen= ({navigation}) => {
       = data.split('_').map(e=>e.split('=')[1]);
 
     if (isValidCoupon(certTime, couponStoreName, storeName)){
-      // database()
-      //   .ref(`/coupons/${userToken}/`)
-      //   .set({
-      //     time: time,
-      //     n: n,
-      //     discount: discount,
-      //     storeName: storeName
-      //   })
+      database()
+        .ref(`/coupons/${userToken}/${storeName}/${time}/`)
+        .set({
+          certTime: certTime,
+          n: n,
+          discount: discount
+        })
       Alert.alert("인증 완료되었습니다", `${storeName}쿠폰 ${n}명 ${discount}%`, [
         { text: "OK", onPress: () => setScaned(true) },
       ]);
