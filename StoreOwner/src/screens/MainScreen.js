@@ -1,10 +1,12 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {SafeAreaView,Text,} from 'react-native';
 
 import {Alert,Vibration,View,} from "react-native";
 import { Camera, CameraType } from "react-native-camera-kit";
 import { Dimensions} from 'react-native';
 import database from '@react-native-firebase/database';
+
+import { AuthContext } from '../App';
 
 const CameraFocus = ()=> (
   <View style={{ position:"absolute", borderColor: "white", 
@@ -13,8 +15,6 @@ const CameraFocus = ()=> (
         top: (Dimensions.get('window').height-Dimensions.get('window').width*0.66)/2,
         left: Dimensions.get('window').width*0.16}}></View>
 );
-
-const storeName = '꼬메노';
 
 const isValidCoupon = (certTime, couponStoreName, storeName) => {
   console.log(couponStoreName, storeName)
@@ -27,6 +27,7 @@ const isValidCoupon = (certTime, couponStoreName, storeName) => {
 
 
 const MainScreen= ({navigation}) => {
+  const { storeName } = useContext(AuthContext);
   const [scaned, setScaned] = useState(true);
   useEffect(() => {
     // 종료후 재시작을 했을때 초기화

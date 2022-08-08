@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useReducer, createContext } from 'react';
-import {useNavigation, NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainScreen from './screens/MainScreen';
 import CertScreen from './screens/CertScreen';
@@ -45,11 +45,13 @@ const App = () => {
 						userToken: action.token,
 						isLoading: false,
             storeCodes: action.codes,
+            storeName: action.storeName,
 					};
 				case 'SIGN_IN':
 					return {
 						...prevState,
 						userToken: action.token,
+            storeName: action.storeName,
 					};
 			}
 		},
@@ -57,6 +59,7 @@ const App = () => {
 			isLoading: true,
 			userToken: null,
       storeCodes: {},
+      storeName: null,
 		} 
 	);
 
@@ -70,9 +73,11 @@ const App = () => {
           const localcode = await getData();
           console.log(localcode);
           if (localcode) {
-            dispatch({ type: 'RESTORE_TOKEN', token: localcode,  codes: codes });
+            dispatch({ 
+              type: 'RESTORE_TOKEN', token: localcode,  codes: codes, storeName: codes[localcode] 
+            });
           } else {
-            dispatch({ type: 'RESTORE_TOKEN', token: null, codes: codes });
+            dispatch({ type: 'RESTORE_TOKEN', token: null, codes: codes, storeName: null });
           }
         }
         fetchData(codes)
@@ -85,10 +90,11 @@ const App = () => {
   const authContext = useMemo(
 		() => ({
 			signIn: (inputcode) => {
-				dispatch({type: 'SIGN_IN', token: inputcode});
+				dispatch({type: 'SIGN_IN', token: inputcode, storeName: state.storeCodes[inputcode]});
         storeData(inputcode);
 			},
-			storeCodes: state.storeCodes
+			storeCodes: state.storeCodes,
+      storeName: state.storeName,
 		}),
 		[state.storeCodes]
 	);
