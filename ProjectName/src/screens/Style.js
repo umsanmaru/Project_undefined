@@ -16,31 +16,30 @@ const styles = StyleSheet.create({
   },
   ButtonContainer: {
       width: Dimensions.get('window').width/2-40,
-      height: Dimensions.get('window').width/2+4,
       //backgroundColor: "lightblue",
       display: 'flex',
       alignItems: 'flex-start',
     },
     PictureContainer: {
-      backgroundColor: "lightblue",
+      backgroundColor: "gray",
       borderRadius: 16,
       width: Dimensions.get('window').width/2-40,
       height: Dimensions.get('window').width/2-40,
+      marginBottom: 8,
     },
     Name: {
       color: "#212121",
-      //backgroundColor: "lightblue",
+      //backgroundColor: "white",
       fontSize: 16,
-      left: 8, top: Platform.OS === "android" ? 6 :  12,
-      width: Dimensions.get('window').width/2-56,
+      left: 8, 
+      width: Dimensions.get('window').width/2-56, height: 24,
     },
     Info: {
       color: '#8F8F8F',
       //backgroundColor: "pink",
       fontSize: 12,
-      top: Platform.OS === "android" ? 6 :  16,
       left: 8,
-      width: Dimensions.get('window').width/2-56,
+      width: Dimensions.get('window').width/2-56, height: 16,
     },
     DiscountBar: {
       backgroundColor: "#4769EE",
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
     RowContainer: {
       flexDirection: 'row',
       marginHorizontal: 32,
-      marginVertical: Platform.OS === "android" ? 12 :  10,
+      marginVertical: 10,
       justifyContent: 'space-between',
       //backgroundColor: "lightblue"
       //alignItems: 'center',
@@ -95,7 +94,9 @@ const styles = StyleSheet.create({
     Header: {
       borderBottomWidth: 1,
       borderColor: '#EDEDEE',
-      marginBottom: 6
+      marginBottom: 6,
+      paddingTop: 24, 
+      //backgroundColor: "pink",
     },
     modal:{
       height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 

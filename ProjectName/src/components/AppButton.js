@@ -34,12 +34,10 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
       })} 
       style={styles.ButtonContainer}
     >
-      <View style={styles.PictureContainer}>
       <Image
           style={styles.PictureContainer}
           source={{ uri: url }}
         />
-      </View>
       <View style={styles.DiscountBar}>
         <BoldText style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</BoldText>
       </View>
