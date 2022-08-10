@@ -21,10 +21,10 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
     },
     PictureContainer: {
-      backgroundColor: "gray",
-      borderRadius: 16,
       width: Dimensions.get('window').width/2-40,
       height: Dimensions.get('window').width/2-40,
+      backgroundColor: "gray",
+      borderRadius: 16,
       marginBottom: 8,
     },
     Name: {

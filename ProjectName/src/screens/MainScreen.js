@@ -12,7 +12,7 @@ import SignedHeader from '../components/SignedHeader';
 import AppButton from '../components/AppButton';
 import CertModal from '../components/CertModal';
 
-const isDebugging = false;
+const isDebugging = true;
 
 const MainScreen= ({navigation}) => {
 

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { styles } from "../screens/Style";
-import { View,Image, TouchableOpacity } from 'react-native';
+import { View,Image, TouchableOpacity, Dimensions } from 'react-native';
 import storage from '@react-native-firebase/storage';
 import { defaultFontText as Text } from './Text';
 import { defaultBoldText as BoldText} from './BoldText';
@@ -35,6 +35,9 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
       style={styles.ButtonContainer}
     >
       <Image
+          width= {Dimensions.get('window').width/2-40}
+          height= {Dimensions.get('window').width/2-40}
+          resizeMethod="resize"
           style={styles.PictureContainer}
           source={{ uri: url }}
         />

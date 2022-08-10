@@ -6,7 +6,7 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'StoreOwner' do
   config = use_native_modules!
-
+  use_frameworks!
   # Flags change depending on the env values.
   flags = get_default_flags()
   pod 'Firebase/Auth'

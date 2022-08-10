@@ -1,5 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {SafeAreaView,Text,} from 'react-native';
+import {Button, SafeAreaView,Text,} from 'react-native';
+
 
 import {Alert,Vibration,View,} from "react-native";
 import { Camera, CameraType } from "react-native-camera-kit";
@@ -23,7 +24,6 @@ const isValidCoupon = (certTime, couponStoreName, storeName) => {
     return true;
   return false;
 }
-
 
 
 const MainScreen= ({navigation}) => {
@@ -59,6 +59,7 @@ const MainScreen= ({navigation}) => {
     }
     
   };
+
   return (
     <SafeAreaView style={{flex: 1,}}>
       <View style={{paddingVertical: 18, alignItems: "center"}}>

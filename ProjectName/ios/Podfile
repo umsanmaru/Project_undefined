@@ -14,6 +14,8 @@ target 'ProjectName' do
   # Flags change depending on the env values.
   flags = get_default_flags()
   # Add the Firebase pod for Google Analytics
+  pod 'KakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
+  pod 'KakaoSDKAuth'  # 카카오 로그인
   pod 'Firebase/Auth'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseFirestore'
