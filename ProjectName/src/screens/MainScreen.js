@@ -127,12 +127,12 @@ const MainScreen= ({navigation}) => {
 
   const LoadingList = id.map((button, index)=> (
     <ContentLoader key={index}>
-        <Rect x="32" y={12+index} width={imageSize} height={imageSize}></Rect>
-        <Rect x="40" y={20+imageSize} width={imageSize-16} height="16"></Rect>
-        <Rect x="40" y={44+imageSize} width={imageSize-16} height="12"></Rect>
-        <Rect x={Dimensions.get('window').width-184} y="12" width={imageSize} height={imageSize}></Rect>
-        <Rect x={Dimensions.get('window').width-176} y={20+imageSize} width={imageSize-16} height="16"></Rect>
-        <Rect x={Dimensions.get('window').width-176} y={44+imageSize} width={imageSize-16} height="12"></Rect>
+        <Rect x="32" y={10} width={imageSize} height={imageSize}></Rect>
+        <Rect x="40" y={18+imageSize} width={imageSize-16} height="16"></Rect>
+        <Rect x="40" y={42+imageSize} width={imageSize-16} height="12"></Rect>
+        <Rect x={Dimensions.get('window').width-187} y="10" width={imageSize} height={imageSize}></Rect>
+        <Rect x={Dimensions.get('window').width-179} y={28+imageSize} width={imageSize-16} height="16"></Rect>
+        <Rect x={Dimensions.get('window').width-179} y={42+imageSize} width={imageSize-16} height="12"></Rect>
         </ContentLoader>
   )
   );
@@ -182,7 +182,7 @@ const MainScreen= ({navigation}) => {
       </View>
       {isLoadingStores ? 
         <ScrollView style={{paddingBottom: 32, zIndex: 0}}>
-            <View style={{ width: "100%", height:imageSize+66,}}>{LoadingList}</View>
+            <View style={{ width: "100%", height:imageSize+68,}}>{LoadingList}</View>
         </ScrollView>
         : (<ScrollView style={{zIndex: 0}}>
             <View style={{paddingBottom: 32}}>{buttonList}</View>
