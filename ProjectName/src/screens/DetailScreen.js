@@ -12,6 +12,7 @@ import CertModal from '../components/CertModal.js';
 import Information from '../components/Information.js';
 import CouponModal from '../components/CouponModal.js';
 import DiscountButton from '../components/DiscountButton.js';
+import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 
 const DetailScreen = ({navigation, route}) => {
 
@@ -108,7 +109,10 @@ const DetailScreen = ({navigation, route}) => {
 
   return (
     <SafeAreaView>
-      {!loadbanner ? <View style={{height: 292, backgroundColor: "gray"}}></View> 
+      {!loadbanner ? 
+      <ContentLoader height={292}>
+        <Rect width="100%" height={292}></Rect>
+      </ContentLoader>
       : <SliderBox 
         images = {banner}
         sliderBoxHeight={292}
@@ -128,7 +132,15 @@ const DetailScreen = ({navigation, route}) => {
         }} 
       >
         <View style={styles.scrollview}>
-          {isLoadingStoreInfo ? <ActivityIndicator/> : 
+          {isLoadingStoreInfo ? 
+          <ContentLoader height={Dimensions.get("window").height/2}>
+            <Rect y="8" height= {24} width="50%"></Rect>
+            <Rect y="38" height= {16} width="50%"></Rect>
+            <Rect y="88" height= {16} width="70%"></Rect>
+            <Rect y="108" height= {16} width="70%"></Rect>
+            <Rect y="148" height= {177} width="100%"></Rect>
+          </ContentLoader>
+          : 
             (
               <>
                 <Information 
