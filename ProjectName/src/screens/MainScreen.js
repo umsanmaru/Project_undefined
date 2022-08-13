@@ -14,7 +14,7 @@ import CertModal from '../components/CertModal';
 
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 
-const isDebugging = true;
+const isDebugging = false;
 
 const MainScreen= ({navigation}) => {
 
