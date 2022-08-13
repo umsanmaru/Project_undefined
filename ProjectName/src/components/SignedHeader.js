@@ -49,7 +49,7 @@ const SignedHeader = ({certTime, cancleCert}) => {
       <View style={{marginLeft: 12,}}>
         <Text style={styles.UnsignedText}>관람 인증 완료</Text>
         <Text style={{fontSize: 12,color: "white",}}>
-          {`${year}.${month > 10 ? month : '0' + month}.${date > 10 ? data: '0' + date}`}
+          {`${year}.${month > 10 ? month : '0' + month}.${date > 10 ? date: '0' + date}`}
         </Text>
       </View>
       <View style={{marginRight: 12,}}>

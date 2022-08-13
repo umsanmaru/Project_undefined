@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import { SafeAreaView, Dimensions, ScrollView, View, ActivityIndicator } from 'react-native'
+import { SafeAreaView, Dimensions, ScrollView, View, ActivityIndicator, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather';
 import { SliderBox } from 'react-native-image-slider-box';
 import { styles } from './Style';
@@ -23,6 +23,8 @@ const DetailScreen = ({navigation, route}) => {
   const [openCoupon, setOpenCoupon] = useState(false);
   const [storeInfo, setStoreInfo] = useState({});
   const [banner, setBanner] = useState([]);
+  const [loadbanner, setLoadBanner] = useState(false);
+  const [loadbannerimage, setLoadBannerImage] = useState(false);
   const [isLoadingStoreInfo, setIsLoadingStoreInfo] = useState(true);
 
   const {
@@ -45,6 +47,12 @@ const DetailScreen = ({navigation, route}) => {
       certificated={certificated}
     /> 
   ))
+
+  const loadScreen = ()=> {
+    <View style={{height: 292, }}>
+      <Text style={{ fontSize: 24, color: "black" }}>My Button</Text>
+    </View>
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -93,19 +101,25 @@ const DetailScreen = ({navigation, route}) => {
     ]).then(
       res => {
         setBanner([res[0], res[1], res[2]])
+        setLoadBanner(true)
       }
     )
   }, [])
 
   return (
     <SafeAreaView>
-      <SliderBox 
-        images ={banner} 
+      {!loadbanner ? <View style={{height: 292, backgroundColor: "gray"}}></View> 
+      : <SliderBox 
+        images = {banner}
         sliderBoxHeight={292}
+        parentWidth={Dimensions.get("window").width}
+        imageLoadingColor="gray"
         dotColor="#FFFFFF" 
         inactiveDotColor="lightgray" 
         dotStyle={styles.sliderdot}
-      />
+        setLoadStatus = {setLoadBanner}
+      />}
+      
       <ScrollView 
         style={{
           height: 
