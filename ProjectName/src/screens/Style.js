@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,
       borderColor: '#EDEDEE',
       marginBottom: 6,
-      paddingTop: 24, 
+      paddingTop: Platform.OS === "android" ? 16: 24, 
       //backgroundColor: "pink",
     },
     modal:{

@@ -16,7 +16,8 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
 
   useEffect(() => {
     isMounted.current = true;
-    return () => isMounted.current = false;
+    return () => {isMounted.current = false;}
+    
   }, []);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
         if (isMounted.current) setUrl(url);
       });
   }, []);
-
+  
   return (
     <View>
     <TouchableOpacity 
@@ -39,17 +40,18 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
       style={styles.ButtonContainer}
     >
       {!imageLoad ? 
-      <ContentLoader width={imageSize} height={imageSize+8} style={{position:"absolute"}} >
+      <ContentLoader width={imageSize} height={imageSize+8} style={{zIndex: 20, position:"absolute"}} >
         <Rect width={imageSize} height={imageSize} ></Rect>
       </ContentLoader> : <View/>}
-      <View style={{zIndex: -10, }}>
+      <View style={{zIndex: -20,}}>
         <Image
           width= {Dimensions.get('window').width/2-40}
           height= {Dimensions.get('window').width/2-40}
           resizeMethod="resize"
           style={styles.PictureContainer}
           source={{ uri: url }}
-          onLoadEnd={() => {setImageLoad(true);}}
+          //onLoadStart={() => {setImageLoad(false); }}
+          onLoadEnd={() => {setImageLoad(true); console.log(imageLoad);}}
         />
       <View style={styles.DiscountBar}>
         <BoldText style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</BoldText>

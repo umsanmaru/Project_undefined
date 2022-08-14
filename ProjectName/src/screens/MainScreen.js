@@ -138,7 +138,7 @@ const MainScreen= ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === 'android' ? 8 : 0,}}>
+    <SafeAreaView style={{flex: 1, }}>
       {isDebugging ? (
         <>
           <Button title={'kakaoSignOut'} onPress={signOutKakao} />
