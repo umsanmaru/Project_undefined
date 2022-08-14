@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import { SafeAreaView, Dimensions, ScrollView, View, ActivityIndicator, Text } from 'react-native'
+import { SafeAreaView, Dimensions, ScrollView, View, Platform, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather';
 import { SliderBox } from 'react-native-image-slider-box';
 import { styles } from './Style';
@@ -12,7 +12,7 @@ import CertModal from '../components/CertModal.js';
 import Information from '../components/Information.js';
 import CouponModal from '../components/CouponModal.js';
 import DiscountButton from '../components/DiscountButton.js';
-import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
+import ContentLoader, {Rect,} from 'react-content-loader/native';
 
 const DetailScreen = ({navigation, route}) => {
 
@@ -126,9 +126,7 @@ const DetailScreen = ({navigation, route}) => {
       
       <ScrollView 
         style={{
-          height: 
-            certificated ? 
-              Dimensions.get("window").height*(349/844) : Dimensions.get("window").height*(349/844)
+          height: Platform.OS === "android" ? Dimensions.get("window").height-102-292-60:Dimensions.get("window").height-102-292-105,
         }} 
       >
         <View style={styles.scrollview}>

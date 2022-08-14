@@ -10,10 +10,10 @@ const Footer = ({onPress, buttonText,disable_touch}) => (
     borderTopWidth: 1, 
     paddingHorizontal: 32, 
     paddingTop: 16,
-    height: 102, 
+    paddingBottom: 32,
     width: "100%", 
-    zIndex: 100,
-
+    //position: "absolute", 
+    
   }}>
     <TouchableOpacity onPress={onPress} disabled={disable_touch}>
       <View style={{

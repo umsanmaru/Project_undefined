@@ -16,7 +16,7 @@ const CertModal = ({
       animationType='none' 
       visible={openCert}
       transparent={true} 
-      presentationStyle='overFullScreen' 
+      presentationStyle='overFullScreen'
       style={{zIndex: 1,}}
     >
       <KeyboardAvoidingView 

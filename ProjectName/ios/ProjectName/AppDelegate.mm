@@ -4,7 +4,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-
+#import <RNSplashScreen.h>
 #import <React/RCTAppSetupUtils.h>
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 #if RCT_NEW_ARCH_ENABLED
@@ -60,6 +60,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [RNSplashScreen show];
   return YES;
 }
 

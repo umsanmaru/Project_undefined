@@ -102,8 +102,11 @@ const styles = StyleSheet.create({
       height: "100%", width: "100%", backgroundColor: "rgba(0, 0, 0, 0.4)", 
     },
     modalwhitepart:{
-      position: "absolute", bottom: 0,
-      height: Platform.OS === "android" ? "35%" : "30%", width: "100%", backgroundColor: "white", 
+      position: "absolute", 
+      bottom: 0,
+      //height: Platform.OS === "android" ? "35%" : "30%", 
+      width: "100%", 
+      backgroundColor: "white", 
       borderTopLeftRadius: 30, borderTopRightRadius: 30, 
     },
     textinmodal:{

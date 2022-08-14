@@ -8,7 +8,7 @@ import {
   login as kakaoLogin,
   logout as kakaoLogout
 } from '@react-native-seoul/kakao-login';
-
+import SplashScreen from 'react-native-splash-screen';
 import { Platform } from 'react-native';
 
 import {LogBox} from "react-native";
@@ -37,6 +37,11 @@ async function googleSignOut() {
 }
 
 const App = () => {
+
+	useEffect(() => {
+		SplashScreen.hide();
+	  }, []);
+	  
 	const [state, dispatch] = useReducer(
 		(prevState, action) => {
 			switch (action.type) {
@@ -122,6 +127,8 @@ const App = () => {
 	if (state.isLoading) {
 		return <ActivityIndicator/>
 	}
+
+
 
 	return (
 		<AuthContext.Provider value={authContext}>
