@@ -49,7 +49,7 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
           resizeMethod="resize"
           style={styles.PictureContainer}
           source={{ uri: url }}
-          onLoadEnd={() => {setImageLoad(true); console.log("finish load");}}
+          onLoadEnd={() => {setImageLoad(true);}}
         />
       <View style={styles.DiscountBar}>
         <BoldText style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</BoldText>
