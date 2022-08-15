@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Button, Platform, SafeAreaView, ScrollView, View, ActivityIndicator, Dimensions } from 'react-native';
+import React, { useState, useEffect, useContext , } from 'react';
+import { Button, Platform, ScrollView, View, ActivityIndicator, Dimensions,  TouchableOpacity} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/Feather';
 import { styles } from './Style';
@@ -13,7 +13,7 @@ import AppButton from '../components/AppButton';
 import CertModal from '../components/CertModal';
 
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
-
+import { SafeAreaView } from 'react-native';
 const isDebugging = false;
 
 const MainScreen= ({navigation}) => {
@@ -138,7 +138,7 @@ const MainScreen= ({navigation}) => {
   );
 
   return (
-    <SafeAreaView style={{flex: 1, }}>
+    <SafeAreaView style={{}} >
       {isDebugging ? (
         <>
           <Button title={'kakaoSignOut'} onPress={signOutKakao} />
@@ -187,7 +187,6 @@ const MainScreen= ({navigation}) => {
         : (<ScrollView style={{zIndex: 0}}>
             <View style={{paddingBottom: 32}}>{buttonList}</View>
           </ScrollView>)}
-      
       <CertModal 
         openCert={openCert} 
         setOpenCert={setOpenCert}

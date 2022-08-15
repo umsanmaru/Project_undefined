@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Platform } from 'react-native';
 import { defaultFontText as Text } from './Text';
 import { defaultBoldText as BoldText} from './BoldText';
 
@@ -10,7 +10,7 @@ const Footer = ({onPress, buttonText,disable_touch}) => (
     borderTopWidth: 1, 
     paddingHorizontal: 32, 
     paddingTop: 16,
-    paddingBottom: 32,
+    paddingBottom: Platform.OS === "android" ? 16: 0,
     width: "100%", 
     //position: "absolute", 
     

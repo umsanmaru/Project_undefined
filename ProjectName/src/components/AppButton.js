@@ -30,13 +30,13 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
   return (
     <View>
     <TouchableOpacity 
-      onPress={()=>navigation.push('DETAIL', {
+      onPress={()=>{navigation.push('DETAIL', {
         storeName: info.storeName,
         certificated: certificated,
         certTime: certTime,
         userToken: userToken,
         currentExhibit: currentExhibit,
-      })} 
+      }); }} 
       style={styles.ButtonContainer}
     >
       {!imageLoad ? 
@@ -51,7 +51,7 @@ const AppButton = ({ navigation, certificated, certTime, userToken, currentExhib
           style={styles.PictureContainer}
           source={{ uri: url }}
           //onLoadStart={() => {setImageLoad(false); }}
-          onLoadEnd={() => {setImageLoad(true); console.log(imageLoad);}}
+          onLoadEnd={() => {setImageLoad(true); }}
         />
       <View style={styles.DiscountBar}>
         <BoldText style={styles.DiscountNumber}>{`${info.min}~${info.max}%`}</BoldText>

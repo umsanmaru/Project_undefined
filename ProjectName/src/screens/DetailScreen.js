@@ -108,7 +108,7 @@ const DetailScreen = ({navigation, route}) => {
   }, [])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{height:"100%"}}>
       {!loadbanner ? 
       <ContentLoader height={292}>
         <Rect width="100%" height={292}></Rect>

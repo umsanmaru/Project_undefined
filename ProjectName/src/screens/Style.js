@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     PictureContainer: {
       width: Dimensions.get('window').width/2-40,
       height: Dimensions.get('window').width/2-40,
-      backgroundColor: "gray",
+      //backgroundColor: "gray",
       borderRadius: 16,
       marginBottom: 8,
     },
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
     modalwhitepart:{
       position: "absolute", 
       bottom: 0,
-      //height: Platform.OS === "android" ? "35%" : "30%", 
       width: "100%", 
       backgroundColor: "white", 
       borderTopLeftRadius: 30, borderTopRightRadius: 30, 
+      paddingBottom : 0,
     },
     textinmodal:{
       fontSize: 23, color:"black", marginBottom: 16,
