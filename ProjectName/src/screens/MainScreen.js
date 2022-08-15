@@ -14,7 +14,7 @@ import CertModal from '../components/CertModal';
 
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 import { SafeAreaView } from 'react-native';
-const isDebugging = false;
+const isDebugging = true;
 
 const MainScreen= ({navigation}) => {
 
